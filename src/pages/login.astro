@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Container from '../components/Container.astro';
 
 const hasError = Astro.url.searchParams.get("error") === "1";
 ---
@@ -9,12 +8,11 @@ const hasError = Astro.url.searchParams.get("error") === "1";
   title="Kundenlogin | ThinkUp-AI" 
   description="Login zum ThinkUp-AI Kundenbereich."
 >
-  <section class="min-h-screen bg-black px-6 pt-36 pb-24 text-white overflow-hidden">
+  <section class="relative min-h-screen overflow-hidden bg-black px-6 pt-36 pb-24 text-white">
     <div class="absolute left-[-10rem] top-32 h-[420px] w-[420px] rounded-full bg-[#58FFE9]/10 blur-[120px]"></div>
     <div class="absolute right-[-10rem] bottom-20 h-[420px] w-[420px] rounded-full bg-[#58FFE9]/10 blur-[120px]"></div>
 
-    <Container class="relative z-10 max-w-5xl">
-      <div class="mx-auto grid max-w-xl gap-10 text-center lg:max-w-none lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:text-left">
+    <div class="relative z-10 mx-auto grid w-full max-w-xl gap-10 text-center lg:max-w-5xl lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:text-left">
         
         <div class="flex flex-col items-center lg:items-start">
           <span class="inline-flex rounded-full border border-[#58FFE9]/35 bg-[#58FFE9]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
@@ -79,7 +77,6 @@ const hasError = Astro.url.searchParams.get("error") === "1";
           </form>
         </div>
 
-      </div>
-    </Container>
+    </div>
   </section>
 </Layout>
