@@ -19,7 +19,7 @@
     "@astrojs/vercel": "^9.0.2",
     "@types/aos": "^3.0.7",
     "@types/nodemailer": "^6.4.20",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.2",
     "autoprefixer": "^10.4.21",
