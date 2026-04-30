@@ -5,12 +5,19 @@
     let isExpanded = false;
     let dropdownTimeout = null;
 
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('#dynamic-header');
-      if (!header) return;
+	    window.addEventListener('scroll', () => {
+	      const header = document.querySelector('#dynamic-header');
+	      if (!header) return;
+	      const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-      if (window.scrollY > 50) {
-        if (!isExpanded) {
+	      if (isMobile) {
+	        header.classList.remove('compact', 'expanded');
+	        isExpanded = false;
+	        return;
+	      }
+	
+	      if (window.scrollY > 50) {
+	        if (!isExpanded) {
           header.classList.add('compact');
           header.classList.remove('expanded');
         }
@@ -33,12 +40,15 @@
       const leistungenLink = document.querySelector('#leistungen-link');
       const dropdown = document.querySelector('#leistungen-dropdown');
 
-      if (toggleBtn && header) {
-        toggleBtn.addEventListener('click', () => {
-          const isNowExpanded = header.classList.toggle('expanded');
-          header.classList.toggle('compact', !isNowExpanded);
-          isExpanded = isNowExpanded;
-        });
+	      if (toggleBtn && header) {
+	        toggleBtn.addEventListener('click', () => {
+	          const isMobile = window.matchMedia('(max-width: 767px)').matches;
+	          if (isMobile) return;
+
+	          const isNowExpanded = header.classList.toggle('expanded');
+	          header.classList.toggle('compact', !isNowExpanded);
+	          isExpanded = isNowExpanded;
+	        });
       }
 
       if (leistungenLink && dropdown) {
