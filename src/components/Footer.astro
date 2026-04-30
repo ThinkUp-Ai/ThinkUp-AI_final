@@ -1,3 +1,7 @@
+---
+const contactEmail = import.meta.env.CONTACT_EMAIL ?? "info@thinkupai.de";
+---
+
 <footer class="mt-20 border-y border-[#ccc] bg-black py-10 text-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
@@ -60,8 +64,8 @@
         <div class="space-y-2 text-sm text-white/75">
           <p>
             E-Mail:
-            <a href="mailto:info@thinkupai.de" class="hover:text-accent">
-              info@thinkupai.de
+            <a href={`mailto:${contactEmail}`} class="hover:text-accent">
+              {contactEmail}
             </a>
           </p>
           <p>
