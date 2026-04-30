@@ -24,6 +24,8 @@ declare global {
     readonly N8N_WEBHOOK_SECRET?: string;
     readonly TWILIO_ACCOUNT_SID?: string;
     readonly TWILIO_AUTH_TOKEN?: string;
+    readonly PUBLIC_META_APP_ID?: string;
+    readonly PUBLIC_META_CONFIG_ID?: string;
   }
 
   interface ImportMeta {

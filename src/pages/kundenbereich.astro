@@ -597,6 +597,39 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
 </Layout>
 
 <script>
+  type FacebookAuthResponse = {
+    code?: string;
+  };
+
+  type FacebookLoginResponse = {
+    authResponse?: FacebookAuthResponse;
+  };
+
+  type FacebookSdk = {
+    init: (options: {
+      appId: string;
+      cookie: boolean;
+      xfbml: boolean;
+      version: string;
+    }) => void;
+    login: (
+      callback: (response: FacebookLoginResponse) => void,
+      options: {
+        config_id: string;
+        response_type: string;
+        override_default_response_type: boolean;
+        extras: {
+          setup: Record<string, never>;
+        };
+      }
+    ) => void;
+  };
+
+  const metaWindow = window as Window & {
+    FB?: FacebookSdk;
+    fbAsyncInit?: () => void;
+  };
+
   let companyDataSubmitted = false;
 
   const companyForm = document.getElementById("company-form");
@@ -628,9 +661,10 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
 
   const appId = import.meta.env.PUBLIC_META_APP_ID;
   const configId = import.meta.env.PUBLIC_META_CONFIG_ID;
+  let facebookSdkPromise: Promise<FacebookSdk> | null = null;
 
-  function validateCompanyForm(form) {
-    const fields = form.querySelectorAll(".required-field");
+  function validateCompanyForm(form: HTMLFormElement) {
+    const fields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(".required-field");
     let isValid = true;
 
     fields.forEach((field) => {
@@ -668,7 +702,8 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
     const formData = new FormData(form);
     const companyData = Object.fromEntries(formData.entries());
 
-    companyData.singleContactForStore = singleContactCheckbox?.checked ? "true" : "false";
+    companyData.singleContactForStore =
+      singleContactCheckbox instanceof HTMLInputElement && singleContactCheckbox.checked ? "true" : "false";
 
     console.log("Unternehmensdaten:", companyData);
 
@@ -735,28 +770,32 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
     }
   });
 
-  function setMetaStatus(message) {
+  function setMetaStatus(message: string) {
     if (metaStatus) {
       metaStatus.textContent = message;
     }
   }
 
-  function loadFacebookSdk() {
-    return new Promise((resolve) => {
-      if (window.FB) {
-        resolve(window.FB);
+  function loadFacebookSdk(metaAppId: string) {
+    if (facebookSdkPromise) return facebookSdkPromise;
+
+    facebookSdkPromise = new Promise<FacebookSdk>((resolve) => {
+      if (metaWindow.FB) {
+        resolve(metaWindow.FB);
         return;
       }
 
-      window.fbAsyncInit = function () {
-        window.FB.init({
-          appId,
+      metaWindow.fbAsyncInit = function () {
+        if (!metaWindow.FB) return;
+
+        metaWindow.FB.init({
+          appId: metaAppId,
           cookie: true,
           xfbml: true,
           version: "v19.0",
         });
 
-        resolve(window.FB);
+        resolve(metaWindow.FB);
       };
 
       const existingScript = document.getElementById("facebook-jssdk");
@@ -769,6 +808,8 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
       script.defer = true;
       document.body.appendChild(script);
     });
+
+    return facebookSdkPromise;
   }
 
   metaButton?.addEventListener("click", async () => {
@@ -784,7 +825,7 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
       return;
     }
 
-    const FB = await loadFacebookSdk();
+    const FB = await loadFacebookSdk(appId);
 
     FB.login(
       function (response) {
