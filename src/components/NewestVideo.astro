@@ -1,0 +1,125 @@
+---
+ // Hier könnten Props übergeben werden, falls die Komponente flexibler sein soll
+---
+<section
+  class="relative px-4 text-center text-primary py-16 md:py-24"
+>
+  <div
+    class="max-w-3xl mx-auto bg-gray-100/60 backdrop-blur-lg border border-gray-300 rounded-2xl shadow-xl p-8"
+    data-aos="fade-up"
+    data-aos-duration="800"
+  >
+    <h2 class="text-3xl font-bold text-accent mb-6 md:mb-8">
+      📺 Unser neuestes YouTube-Video
+    </h2>
+
+    <p class="mb-8 text-lg md:text-xl">
+      Entdecke Impulse rund um KI & Automatisierung.
+    </p>
+
+    <div id="youtube-video-placeholder-newest" class="text-primary">
+      <p>
+        Um das Video zu sehen, musst du <strong>alle Cookies akzeptieren</strong>.
+        <br />
+        <button
+          id="resetCookieConsentBtnNewestVideo"
+          class="underline text-accent mt-2 hover:text-accent/80 transition-colors"
+        >
+          Cookie-Einstellungen ändern
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <script is:inline>
+    const placeholderNewestVideo = document.getElementById("youtube-video-placeholder-newest");
+    const resetBtnNewestVideo = document.getElementById("resetCookieConsentBtnNewestVideo");
+
+    if (resetBtnNewestVideo && typeof window.showCookieSettings === 'function') {
+      resetBtnNewestVideo.addEventListener('click', () => {
+        window.showCookieSettings();
+      });
+    } else if (resetBtnNewestVideo) {
+      resetBtnNewestVideo.addEventListener('click', () => {
+        if (typeof window.openSettings === 'function') {
+          window.openSettings();
+        } else {
+          alert('Bitte öffne die Cookie-Einstellungen über das Cookie-Banner oder die Datenschutzerklärung, um deine Auswahl zu ändern.');
+        }
+      });
+      console.warn("window.showCookieSettings() function not found for NewestVideo section. Button might not work as expected.");
+    }
+
+    async function loadNewestVideoIfConsented() {
+      if (!placeholderNewestVideo) return;
+
+      try {
+        const rawCookie = document.cookie
+          .split("; ")
+          .find((c) => c.startsWith("cookieConsent="));
+
+        if (!rawCookie) {
+          return;
+        }
+
+        const consentDataString = decodeURIComponent(rawCookie.split("=")[1]);
+        let consent;
+        try {
+            consent = JSON.parse(consentDataString);
+        } catch (parseError) {
+            console.error("Error parsing cookieConsent JSON for NewestVideo:", parseError);
+            placeholderNewestVideo.innerHTML = `<p>Fehler beim Lesen der Cookie-Einstellungen.</p>`;
+            return;
+        }
+
+        const isExpired = consent && consent.expiresAt && (new Date(consent.expiresAt) < new Date());
+        const ytEnabled = Array.isArray(consent?.categories) && consent.categories.includes("youtube");
+
+        if (!ytEnabled || isExpired) {
+          return;
+        }
+
+        const response = await fetch("/api/latest-video.json");
+
+        if (!response.ok) {
+          let errorMsg = `Fehlercode: ${response.status}`;
+          try {
+            const errData = await response.json();
+            errorMsg = errData.error || errData.message || `Videoinformationen konnten nicht geladen werden (${response.status}).`;
+          } catch (e) { /* Fehler beim Parsen der JSON-Fehlerantwort */ }
+          placeholderNewestVideo.innerHTML = `<p>${errorMsg}</p>`;
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          placeholderNewestVideo.innerHTML = `<p>${data.error}</p>`;
+          return;
+        }
+        const videoId = data?.videoId;
+
+        if (!videoId) {
+            placeholderNewestVideo.innerHTML = `<p>Derzeit ist kein passendes Video verfügbar (Länge > 2 Min.).</p>`;
+            return;
+        }
+
+        placeholderNewestVideo.innerHTML = `
+          <div class="w-full max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-xl">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/${videoId}"
+              frameborder="0"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              class="w-full h-full"
+            ></iframe>
+          </div>
+        `;
+      } catch (e) {
+        console.error("Consent check or video loading failed for NewestVideo:", e);
+        placeholderNewestVideo.innerHTML = `<p>Ein Fehler ist beim Laden des Videos aufgetreten.</p>`;
+      }
+    }
+    loadNewestVideoIfConsented();
+  </script>
+</section>

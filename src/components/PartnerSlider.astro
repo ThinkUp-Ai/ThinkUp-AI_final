@@ -1,0 +1,243 @@
+---
+const partners = [
+  { src: "/wave2network.jfif", name: "Wave2Network", alt: "Wave2Network" },
+  { src: "/haftstein.png", name: "Diana Haftstein", alt: "Diana Haftstein" },
+  { src: "/schmatec.jpg", name: "Schmatec GmbH", alt: "Schmatec GmbH" },
+  { src: "/koch.png", name: "Simone Koch", alt: "Naturheilverfahren Simone Koch" },
+  { src: "/gds.jpeg", name: "Gesichter der Stadt Rottweil", alt: "Gesichter der Stadt Rottweil" },
+  { src: "/ländledigital.jpeg", name: "Ländle Digital GmbH", alt: "Ländle Digital GmbH" },
+  { src: "", name: "Schlafberatung Klaudia Schall", alt: "Schlafberatung Klaudia Schall", placeholder: true },
+];
+
+const sliderItems = [...partners, ...partners, ...partners, ...partners];
+---
+
+<section class="partner-section">
+  <div class="partner-header">
+    <span>Unser Netzwerk</span>
+    <h2>Partner & Kunden</h2>
+    <p>Unternehmen, die mit ThinkUp-AI ihre Kommunikation automatisieren.</p>
+  </div>
+
+  <div class="logo-marquee">
+    <div class="logo-track">
+      {sliderItems.map((p) => (
+        <div class="logo-card">
+          <div class="logo-wrap">
+            {p.placeholder ? (
+              <span class="placeholder-logo">KS</span>
+            ) : (
+              <img src={p.src} alt={p.alt} loading="lazy" />
+            )}
+          </div>
+          <p>{p.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .partner-section {
+    position: relative;
+    background:
+      linear-gradient(to bottom, #000 0%, #020f0f 18%, #020f0f 82%, #000 100%),
+      radial-gradient(circle at 50% 45%, rgba(72, 255, 235, 0.18), transparent 42%);
+    color: #fff;
+    padding: 115px 0 120px;
+    overflow: hidden;
+  }
+
+  .partner-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 30%, rgba(72,255,235,0.18), transparent 28%),
+      radial-gradient(circle at 85% 70%, rgba(72,255,235,0.14), transparent 30%);
+    pointer-events: none;
+  }
+
+  .partner-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 170px;
+    background: linear-gradient(to bottom, #000, transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .partner-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 56px;
+    padding: 0 20px;
+  }
+
+  .partner-header span {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #48ffeb;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .partner-header h2 {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 72px);
+    font-weight: 950;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+  }
+
+  .partner-header p {
+    margin: 20px auto 0;
+    max-width: 650px;
+    color: rgba(255,255,255,0.72);
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .logo-marquee {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    padding: 22px 0 28px;
+  }
+
+  .logo-marquee::before,
+  .logo-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 210px;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .logo-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, #020f0f 8%, transparent);
+  }
+
+  .logo-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, #020f0f 8%, transparent);
+  }
+
+  .logo-track {
+    display: flex;
+    align-items: stretch;
+    gap: 36px;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+    will-change: transform;
+  }
+
+  .logo-card {
+    flex: 0 0 275px;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(72, 255, 235, 0.42);
+    border-radius: 32px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 18px 58px rgba(72, 255, 235, 0.10),
+      0 18px 55px rgba(0,0,0,0.40);
+    padding: 26px 24px;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  }
+
+  .logo-card:hover {
+    transform: translateY(-8px) scale(1.06);
+    border-color: rgba(72, 255, 235, 0.78);
+    box-shadow:
+      0 0 42px rgba(72, 255, 235, 0.35),
+      0 28px 85px rgba(0,0,0,0.58);
+  }
+
+  .logo-wrap {
+    height: 78px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-wrap img {
+    max-width: 185px;
+    max-height: 76px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .placeholder-logo {
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #48ffeb, #0c3636);
+    color: white;
+    font-weight: 950;
+    font-size: 22px;
+    box-shadow: 0 12px 35px rgba(72, 255, 235, 0.35);
+  }
+
+  .logo-card p {
+    margin: 0;
+    color: #050505;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    .partner-section {
+      padding: 75px 0 80px;
+    }
+
+    .partner-header h2 {
+      font-size: 42px;
+    }
+
+    .partner-header p {
+      font-size: 16px;
+    }
+
+    .logo-track {
+      gap: 22px;
+      animation-duration: 30s;
+    }
+
+    .logo-card {
+      flex-basis: 220px;
+      min-height: 145px;
+      padding: 22px 18px;
+    }
+
+    .logo-wrap img {
+      max-width: 155px;
+      max-height: 62px;
+    }
+  }
+</style>

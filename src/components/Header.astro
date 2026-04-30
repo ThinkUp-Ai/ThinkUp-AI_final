@@ -1,0 +1,229 @@
+---
+---
+<script>
+  if (typeof window !== 'undefined') {
+    let isExpanded = false;
+    let dropdownTimeout = null;
+
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('#dynamic-header');
+      if (!header) return;
+
+      if (window.scrollY > 50) {
+        if (!isExpanded) {
+          header.classList.add('compact');
+          header.classList.remove('expanded');
+        }
+      } else {
+        if (!isExpanded) {
+          header.classList.remove('compact');
+        }
+      }
+
+      if (isExpanded) {
+        header.classList.remove('expanded');
+        header.classList.add('compact');
+        isExpanded = false;
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.querySelector('#menu-toggle');
+      const header = document.querySelector('#dynamic-header');
+      const leistungenLink = document.querySelector('#leistungen-link');
+      const dropdown = document.querySelector('#leistungen-dropdown');
+
+      if (toggleBtn && header) {
+        toggleBtn.addEventListener('click', () => {
+          const isNowExpanded = header.classList.toggle('expanded');
+          header.classList.toggle('compact', !isNowExpanded);
+          isExpanded = isNowExpanded;
+        });
+      }
+
+      if (leistungenLink && dropdown) {
+        leistungenLink.addEventListener('mouseenter', () => {
+          if (dropdownTimeout) clearTimeout(dropdownTimeout);
+          dropdown.classList.remove('hidden');
+          dropdown.classList.add('visible');
+        });
+
+        leistungenLink.addEventListener('mouseleave', () => {
+          dropdownTimeout = setTimeout(() => {
+            dropdown.classList.remove('visible');
+            dropdown.classList.add('hidden');
+          }, 150);
+        });
+
+        dropdown.addEventListener('mouseenter', () => {
+          if (dropdownTimeout) clearTimeout(dropdownTimeout);
+          dropdown.classList.remove('hidden');
+          dropdown.classList.add('visible');
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          dropdown.classList.remove('visible');
+          dropdown.classList.add('hidden');
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+  .glass-header {
+    @apply fixed top-6 left-1/2 transform -translate-x-1/2 w-[90%] max-w-5xl z-50 flex items-center justify-between px-6 py-4 transition-all duration-500;
+    background-color: #ccc;
+    border-radius: 2rem;
+    color: #0b0b0b;
+  }
+
+  .compact {
+    @apply left-6 top-6 h-[64px] px-4 py-2 rounded-full;
+    width: auto;
+    background-color: #ccc;
+    transform: none !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .compact .nav-links,
+  .compact .logo-text {
+    display: none;
+  }
+
+  .compact #menu-toggle {
+    display: flex;
+  }
+
+  .expanded {
+    @apply left-1/2 transform -translate-x-1/2 w-[90%] max-w-5xl rounded-3xl;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+  .hamburger span {
+    @apply block w-5 h-[2px] my-[2px];
+    background-color: #0b0b0b;
+  }
+
+  .hamburger {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    object-fit: cover;
+  }
+
+  .dropdown-container {
+    position: relative;
+  }
+
+  .leistungen-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 0.75rem;
+    min-width: 200px;
+    background-color: #ccc;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+    transform: translateX(-50%) translateY(-8px);
+  }
+
+  .leistungen-dropdown.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #0b0b0b;
+    border-radius: 0.75rem;
+    transition: 0.2s;
+    font-size: 0.875rem;
+  }
+
+  .dropdown-link:hover {
+    background: rgba(255,255,255,0.3);
+    color: #58FFE9;
+  }
+
+  /* 🔥 CLEAN PREMIUM BUTTON */
+  .customer-login {
+    @apply rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition;
+
+    color: #58FFE9;
+
+    border: 1px solid rgba(88,255,233,0.35);
+
+    background: rgba(0,0,0,0.35);
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+
+    white-space: nowrap;
+  }
+
+  .customer-login:hover {
+    color: #0b0b0b;
+
+    background: #58FFE9;
+
+    box-shadow:
+      0 0 20px rgba(88,255,233,0.6),
+      0 0 50px rgba(88,255,233,0.3);
+
+    transform: translateY(-1px) scale(1.04);
+  }
+</style>
+
+<header id="dynamic-header" class="glass-header">
+  <a href="/" class="flex items-center gap-2">
+    <img src="/logo.png" alt="Logo" class="logo-icon" />
+    <span class="logo-text text-sm font-semibold">ThinkUp-AI</span>
+  </a>
+
+  <nav class="nav-links flex gap-5 text-sm font-light items-center mr-3">
+    <a href="/" class="hover:text-[#58FFE9] transition hidden md:block">Home</a>
+
+    <div class="dropdown-container">
+      <a href="#" id="leistungen-link" class="hover:text-[#58FFE9] transition cursor-pointer">
+        Leistungen
+      </a>
+
+      <div id="leistungen-dropdown" class="leistungen-dropdown hidden">
+        <a href="/automatisierung" class="dropdown-link">Automatisierung</a>
+        <a href="/instagram" class="dropdown-link">Instagram</a>
+        <a href="/whatsapp" class="dropdown-link">WhatsApp</a>
+        <a href="/telefon" class="dropdown-link">Telefon</a>
+        <a href="/website" class="dropdown-link">Website</a>
+      </div>
+    </div>
+
+    <a href="/about" class="hover:text-[#58FFE9] transition">Über uns</a>
+
+    <a href="/login" class="customer-login">
+      Kundenlogin
+    </a>
+  </nav>
+
+  <button id="menu-toggle" class="hamburger ml-2">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>

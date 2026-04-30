@@ -1,0 +1,49 @@
+---
+// src/pages/impressum.astro
+
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+import EmailReveal from '../components/EmailReveal.astro';
+---
+
+<Layout title="Impressum | ThinkUp-AI" description="Impressum und rechtliche Angaben zur Himmelsbach, Koch, Müller & Schick GbR.">
+  
+  <Container class="text-center leading-relaxed mt-32 mb-16 max-w-3xl mx-auto"> 
+    
+    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold text-accent mb-8">Impressum</h1>
+
+    <div class="mt-10 mb-8">
+      <h2 class="font-semibold text-xl mb-1">Betreiber der Plattform "ThinkUp-AI":</h2>
+      <p class="font-bold">
+        Himmelsbach, Koch, Müller & Schick GbR
+      </p>
+    </div>
+    
+    <h2 class="font-semibold mt-10 mb-2">Angaben gemäß § 5 TMG</h2>
+    <p>
+      GbR mit Marc Himmelsbach, Julius Caspar Koch, Marcel Müller, Leon Schick
+    </p>
+
+    <h2 class="font-semibold mt-6 mb-2">Markenname:</h2>
+    <p>
+      <strong>ThinkUp-AI</strong>
+    </p>
+
+    <p class="mt-4">
+      Alemannenstraße 7<br />
+      78628 Rottweil
+    </p>
+
+    <h2 class="font-semibold mt-10 mb-2">Vertreten durch die Gesellschafter:</h2>
+    <p>
+      Marc Himmelsbach, Julius Caspar Koch, Marcel Müller, Leon Schick
+    </p>
+
+    <h2 class="font-semibold mt-10 mb-2">Kontakt:</h2>
+    <p>
+      Telefon: +49 15565 658472<br />
+      E-Mail: <EmailReveal className="text-accent hover:underline" label="E-Mail anzeigen" />
+    </p>
+
+  </Container>
+</Layout>

@@ -1,0 +1,157 @@
+---
+import Container from './Container.astro';
+---
+
+<section class="text-center py-16 md:py-24">
+  <Container>
+
+    <!-- TITLE -->
+    <h2 class="text-3xl md:text-4xl font-bold text-[#58FFE9] mb-6">
+      Unsere Service Pakete
+    </h2>
+
+    <!-- SUBTEXT -->
+    <p class="text-sm md:text-base text-white/70 mb-10 max-w-2xl mx-auto">
+      Alle Lösungen funktionieren über die Kanäle Ihrer Wahl – für eine nahtlose und automatisierte Kundenkommunikation.
+    </p>
+
+    <!-- PACKAGES -->
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- PAKET 1 -->
+      <div class="package-card">
+        <h3 class="text-xl font-semibold mb-3">Paket 1</h3>
+        <p class="package-title">FAQ-Agent.</p>
+        <p class="package-text">
+          Ihr KI-Agent beantwortet wiederkehrende Fragen automatisch – unabhängig davon,
+          ob die Anfrage über WhatsApp, Instagram oder Ihre Website kommt.
+        </p>
+        <p class="price">Preis: individuell nach Umfang.</p>
+      </div>
+
+      <!-- PAKET 2 -->
+      <div class="package-card">
+        <h3 class="text-xl font-semibold mb-3">Paket 2</h3>
+        <p class="package-title">Terminbuchung inklusive FAQ-Agent.</p>
+        <p class="package-text">
+          Der Agent beantwortet Anfragen, prüft Verfügbarkeiten und bucht Termine automatisch –
+          inklusive Bestätigung und sauberer Vorbereitung für Ihren Alltag.
+        </p>
+        <p class="price">Preis: individuell nach Umfang.</p>
+      </div>
+
+      <!-- PAKET 3 -->
+      <div class="package-card">
+        <h3 class="text-xl font-semibold mb-3">Paket 3</h3>
+        <p class="package-title">Individuelle KI-Lösung nach Use Case.</p>
+        <p class="package-text">
+          Für komplexere Abläufe entwickeln wir eine maßgeschneiderte Lösung passend zu Ihrem
+          Geschäftsmodell, Ihren Kanälen und internen Prozessen.
+        </p>
+        <p class="price">Preis: individuell nach Umfang.</p>
+      </div>
+
+    </div>
+
+    <!-- EARLY / VORREITER SECTION -->
+    <div class="mt-14">
+      <div class="early-box">
+        <span>REFERENZKUNDEN GESUCHT</span>
+        <p>
+          Sichern Sie sich jetzt exklusive Konditionen für den frühen Einstieg
+          und positionieren Sie sich als digitaler Vorreiter in Ihrer Branche.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA BUTTON -->
+    <div class="mt-10">
+      <a
+        href="/buchen"
+        class="cta-btn"
+      >
+        Jetzt Vorreiter werden
+      </a>
+    </div>
+
+  </Container>
+</section>
+
+<style>
+  .package-card {
+    background: #f3f4f6;
+    color: #000;
+    border-radius: 26px;
+    padding: 28px 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    transition: all 0.28s ease;
+    border: 1px solid rgba(88,255,233,0.15);
+  }
+
+  /* 🔥 GLEICHER HOVER WIE PARTNER */
+  .package-card:hover {
+    transform: translateY(-8px) scale(1.06);
+    box-shadow:
+      0 0 42px rgba(72, 255, 235, 0.35),
+      0 28px 85px rgba(0,0,0,0.58);
+    border-color: rgba(72,255,235,0.6);
+  }
+
+  .package-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .package-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .price {
+    font-size: 12px;
+    color: #777;
+    margin-top: 14px;
+  }
+
+  .early-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 22px;
+    padding: 24px;
+    max-width: 640px;
+    margin: 0 auto;
+    border: 1px solid rgba(88,255,233,0.25);
+  }
+
+  .early-box span {
+    display: block;
+    color: #58FFE9;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+
+  .early-box p {
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: #58FFE9;
+    color: #000;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(88,255,233,0.35);
+    transition: all 0.25s ease;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(88,255,233,0.55);
+  }
+</style>

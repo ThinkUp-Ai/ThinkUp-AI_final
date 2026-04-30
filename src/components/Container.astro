@@ -1,0 +1,14 @@
+---
+// src/components/Container.astro
+
+// Wir deklarieren keine Props explizit, sondern verwenden den Rest-Operator, 
+// um alle Attribute zu übernehmen (inkl. 'class', 'id', 'data-aos' etc.).
+const { class: additionalClasses, ...rest } = Astro.props;
+
+// Basis-Klassen für den Container
+const baseClasses = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+---
+
+<div class:list={[baseClasses, additionalClasses]} {...rest}>
+  <slot />
+</div>

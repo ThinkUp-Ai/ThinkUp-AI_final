@@ -1,0 +1,238 @@
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+/* =============================
+   Custom AOS Animations
+   ============================ */
+[data-aos="fade-out"] {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+[data-aos="fade-out"].aos-animate {
+  opacity: 0;
+}
+
+.wave-chat-container {
+  max-width: 460px;
+  margin: 0 auto;
+  border: 2px solid #5e5c55;
+  border-radius: 24px;
+  background: #4a4842;
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(17, 17, 17, 0.12);
+}
+
+.wave-chat-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 22px 18px;
+  background: linear-gradient(180deg, rgba(86, 83, 76, 0.98), rgba(72, 70, 64, 0.98));
+}
+
+.wave-chat-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fffdf6;
+  letter-spacing: -0.02em;
+}
+
+.wave-chat-header p {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  color: rgba(255, 250, 235, 0.72);
+}
+
+.wave-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top, rgba(255, 209, 59, 0.12), transparent 34%),
+    linear-gradient(180deg, #535047 0%, #48463f 100%);
+}
+
+.wave-msg {
+  max-width: 82%;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.wave-msg.user {
+  background: #ffd13b;
+  color: #1c1b17;
+  margin-left: auto;
+  box-shadow: 0 10px 24px rgba(255, 209, 59, 0.16);
+}
+
+.wave-msg.bot {
+  background: rgba(255, 248, 232, 0.92);
+  color: #2f2c24;
+  border: 1px solid rgba(255, 209, 59, 0.16);
+}
+
+.wave-typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #ffd13b;
+  margin: 0 2px;
+  border-radius: 50%;
+  animation: wave-bounce 1.2s infinite;
+}
+
+.wave-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.wave-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes wave-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.wave-chat-input {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  background: #4a4842;
+  align-items: stretch;
+}
+
+.wave-input-shell {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.wave-input-shell::after {
+  content: none;
+}
+
+.wave-chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 2px solid #6a675f;
+  border-radius: 18px;
+  font-size: 16px;
+  color: #fffdf6;
+  background: #5a574f;
+  position: relative;
+  z-index: 1;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.wave-chat-input input::placeholder {
+  color: rgba(255, 250, 235, 0.52);
+}
+
+.wave-chat-input input:focus {
+  outline: none;
+  border-color: #ffd13b;
+  box-shadow: 0 0 0 3px rgba(255, 209, 59, 0.18);
+  background: #615d55;
+}
+
+.wave-button-shell {
+  position: relative;
+  display: flex;
+}
+
+.wave-button-shell::after {
+  content: none;
+}
+
+.wave-chat-input button {
+  background: #3f3d37;
+  color: #fff7dc;
+  padding: 0 20px;
+  border: 2px solid #ffd13b;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.wave-chat-input button:hover {
+  background: #47443d;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(255, 209, 59, 0.18);
+}
+
+.wave-title-wrap {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 18px;
+}
+
+.wave-title {
+  position: relative;
+  z-index: 1;
+}
+
+.wave-title-ring {
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: 54%;
+  height: 60%;
+  border: 5px solid #ffd13b;
+  border-radius: 9999px;
+  transform: translateY(-50%) rotate(-0.4deg);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .wave-chat-container {
+    height: 580px;
+  }
+
+  .wave-title-wrap {
+    display: block;
+    padding: 0 8px;
+  }
+
+  .wave-title-ring {
+    left: 2%;
+    right: 2%;
+    height: 56%;
+    border-width: 4px;
+  }
+
+  .wave-input-shell::after,
+  .wave-button-shell::after {
+    border-width: 1.5px;
+  }
+
+  .wave-chat-header {
+    padding: 18px 18px 16px;
+  }
+
+  .wave-chat-messages {
+    padding: 14px;
+  }
+
+  .wave-chat-input {
+    padding: 10px;
+  }
+
+  .wave-chat-input button {
+    padding: 0 16px;
+  }
+}

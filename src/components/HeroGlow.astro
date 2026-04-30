@@ -1,0 +1,84 @@
+---
+// src/components/HeroGlow.astro
+const accentColor = "#58FFE9";
+---
+
+<section
+  class="relative flex flex-col items-center justify-center bg-primary text-secondary overflow-visible px-4 pt-[8rem] sm:pt-[10rem] md:pt-[12rem] pb-32"
+  style="min-height: 100vh;"
+>
+  <!-- SVG Glow-Effekt Oben Links mit AOS -->
+  <div
+    class="absolute top-[12%] left-[3%] w-[65vw] md:w-[55vw] lg:w-[45vw] h-auto pointer-events-none animate-pulse-breath z-0"
+    style={{
+      maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)'
+    }}
+  >
+    <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg"
+         class="w-full h-full transform scale-110 opacity-100">
+      <path
+        d="M 0 180 Q 150 -20 300 120"
+        stroke={accentColor}
+        stroke-width="8"
+        stroke-linecap="round"
+        class="blur-sm opacity-80"
+        transform="translate(0, -4.5)"
+      />
+      <path
+        d="M 0 180 Q 150 -20 300 120"
+        stroke={accentColor}
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+
+  <!-- SVG Glow-Effekt Unten Rechts mit AOS -->
+  <div
+    class="absolute bottom-[10%] right-[8%] w-[55vw] md:w-[45vw] lg:w-[35vw] h-auto pointer-events-none animate-pulse-breath animation-delay-1000 z-0"
+    style={{
+      maskImage: 'linear-gradient(to left, transparent 0%, black 25%, black 75%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to left, transparent 0%, black 25%, black 75%, transparent 100%)'
+    }}
+  >
+    <svg viewBox="0 0 250 150" fill="none" xmlns="http://www.w3.org/2000/svg"
+         class="w-full h-full transform scale-110 opacity-100">
+      <path
+        d="M 250 20 Q 100 180 0 70"
+        stroke={accentColor}
+        stroke-width="9"
+        stroke-linecap="round"
+        class="blur-sm opacity-80"
+        transform="translate(0, -5)"
+      />
+      <path
+        d="M 250 20 Q 100 180 0 70"
+        stroke={accentColor}
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+
+  <!-- Inhalt mit Button -->
+  <div class="relative z-10 text-center space-y-8 max-w-3xl">
+    <h1 class="font-bold">
+      <span class="block text-5xl md:text-7xl lg:text-8xl text-accent">
+        ThinkUp-AI
+      </span>
+      <span class="block text-xl md:text-3xl lg:text-4xl text-white mt-3">
+        Termine automatisch buchen
+      </span>
+    </h1>
+
+    <!-- Finaler Button mit Abstand & Hover-Effekt -->
+    <button
+      id="zoomIn"
+      class="bg-white text-primary font-semibold px-6 py-3 mt-6 rounded-xl shadow-md transition hover:ring-2 hover:ring-accent"
+      onclick="location.href='/whatsapp'"
+    >
+      Unsere KI-Agenten testen
+    </button>
+  </div>
+</section>

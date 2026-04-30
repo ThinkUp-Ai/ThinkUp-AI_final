@@ -1,0 +1,110 @@
+<div id="cookie-banner" class="fixed bottom-0 left-5 right-5 md:left-20 md:right-20 bg-white text-black z-[99999] p-4 text-sm hidden rounded-xl shadow-2xl border border-gray-200">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <p class="font-medium text-center md:text-left">Wir verwenden Cookies. Externe Medien wie YouTube nur mit Zustimmung.</p>
+    <div class="flex gap-2 flex-wrap justify-center">
+      <button onclick="window.acceptAllCookies()" class="bg-black text-white px-4 py-2 rounded font-bold hover:bg-gray-800 transition">Alle akzeptieren</button>
+      <button onclick="window.openSettings()" class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 transition">Einstellungen</button>
+      <button onclick="window.acceptOnlyEssential()" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition">Nur notwendige</button>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-settings-dialog" class="fixed inset-0 bg-black/60 z-[100000] hidden items-center justify-center p-4 backdrop-blur-sm">
+  <div class="bg-white text-black p-6 rounded-lg w-full max-w-md shadow-xl">
+    <h2 class="text-xl font-bold mb-4">Cookie-Einstellungen</h2>
+    <div class="space-y-3 mb-6 text-sm">
+      <label class="flex items-center gap-2 cursor-pointer p-2 bg-gray-50 rounded">
+        <input type="checkbox" checked disabled class="w-4 h-4" />
+        <span class="font-bold">Notwendige Cookies (Immer aktiv)</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded">
+        <input type="checkbox" id="youtube-toggle" class="w-4 h-4" />
+        <span>Externe Medien (z. B. YouTube, 3D-Modelle)</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded">
+        <input type="checkbox" id="analytics-toggle" class="w-4 h-4" />
+        <span>Analytics (Statistiken)</span>
+      </label>
+    </div>
+    <div class="flex justify-end gap-2 border-t pt-4">
+      <button class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300" onclick="window.closeSettings()">Abbrechen</button>
+      <button onclick="window.saveCustomConsent()" class="px-4 py-2 bg-black text-white font-semibold rounded border-2 border-black hover:bg-gray-800 transition">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const COOKIE_NAME = "cookieConsent";
+
+  // Hilfsfunktion: Cookie abrufen
+  window.getConsentObject = function() {
+    try {
+      const raw = document.cookie.split("; ").find(c => c.startsWith(COOKIE_NAME + "="));
+      return raw ? JSON.parse(decodeURIComponent(raw.split("=")[1])) : null;
+    } catch (e) { return null; }
+  };
+
+  // Hilfsfunktion: Cookie setzen & neu laden
+  window.setConsentObject = function(consent, categories) {
+    const obj = {
+      consent,
+      categories,
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+    };
+    document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(obj))}; path=/; max-age=2592000; SameSite=Lax; Secure`;
+    localStorage.setItem(COOKIE_NAME, consent);
+    window.location.reload();
+  };
+
+  // Initialisierung beim Laden
+  function init() {
+    const consent = window.getConsentObject();
+    const banner = document.getElementById("cookie-banner");
+    if (!consent && banner) {
+      banner.style.display = 'block';
+      banner.classList.remove("hidden");
+    }
+  }
+  init();
+
+  // Globale Aktionen
+  window.acceptAllCookies = () => window.setConsentObject("all", ["essential", "youtube", "analytics"]);
+  window.acceptOnlyEssential = () => window.setConsentObject("essential", ["essential"]);
+
+  window.openSettings = () => {
+    const dialog = document.getElementById("cookie-settings-dialog");
+    const parsed = window.getConsentObject();
+    if(document.getElementById("youtube-toggle")) document.getElementById("youtube-toggle").checked = parsed?.categories?.includes("youtube") || false;
+    if(document.getElementById("analytics-toggle")) document.getElementById("analytics-toggle").checked = parsed?.categories?.includes("analytics") || false;
+    
+    if(dialog) {
+      dialog.style.display = 'flex';
+      dialog.classList.remove("hidden");
+    }
+    document.getElementById("cookie-banner")?.classList.add("hidden");
+    document.getElementById("cookie-banner")?.setAttribute('style', 'display:none');
+  };
+
+  window.closeSettings = () => {
+    const dialog = document.getElementById("cookie-settings-dialog");
+    if(dialog) {
+      dialog.style.display = 'none';
+      dialog.classList.add("hidden");
+    }
+  };
+
+  window.saveCustomConsent = () => {
+    const cats = ["essential"];
+    if (document.getElementById("youtube-toggle")?.checked) cats.push("youtube");
+    if (document.getElementById("analytics-toggle")?.checked) cats.push("analytics");
+    window.setConsentObject(cats.length === 1 ? "essential" : "custom", cats);
+  };
+
+  window.resetCookieConsent = () => {
+    document.cookie = `${COOKIE_NAME}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure`;
+    localStorage.removeItem(COOKIE_NAME);
+    window.location.reload();
+  };
+
+  window.showCookieSettings = window.openSettings;
+</script>

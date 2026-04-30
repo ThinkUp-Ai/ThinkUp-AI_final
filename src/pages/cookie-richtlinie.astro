@@ -1,0 +1,57 @@
+---
+// src/pages/cookie-richtlinie.astro
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+import EmailReveal from '../components/EmailReveal.astro';
+---
+
+<Layout 
+  title="Cookie-Richtlinie | ThinkUp AI" 
+  description="Cookie-Richtlinie von ThinkUp AI. Informationen zu Cookies und ähnlichen Technologien auf unserer Website."
+>
+  
+  <Container class="mt-32 mb-20 max-w-4xl mx-auto text-center">
+    
+    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 text-accent">Cookie-Richtlinie</h1>
+
+    <div class="prose dark:prose-invert max-w-none mx-auto text-gray-300">
+      <p class="mb-4">
+        Diese Cookie-Richtlinie erklärt, wie ThinkUp AI Cookies und ähnliche Technologien verwendet,
+        um deine Erfahrung auf unserer Website zu verbessern.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-2 text-accent">Was sind Cookies?</h2>
+      <p class="mb-4">
+        Cookies sind kleine Textdateien, die auf deinem Gerät gespeichert werden, wenn du eine Website besuchst.
+        Sie helfen dabei, dich wiederzuerkennen, deine Einstellungen zu speichern oder Inhalte individuell anzupassen.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-2 text-accent">Welche Cookies verwenden wir?</h2>
+      <ul class="list-disc list-inside mb-4 text-left max-w-2xl mx-auto">
+        <li><strong>Erforderliche Cookies:</strong> Notwendig für den technischen Betrieb (z. B. Spracheinstellungen, Cookie-Banner).</li>
+        <li><strong>Funktionale Cookies:</strong> Für erweiterte Funktionen wie Animationen oder eingebettete Inhalte (z. B. YouTube).</li>
+        <li><strong>Analyse-Cookies:</strong> Zur statistischen Auswertung und Verbesserung unseres Angebots.</li>
+        <li><strong>Externe Medien:</strong> Dienen der Anzeige externer Inhalte wie eingebettete Videos oder Social-Media-Elemente.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-2 text-accent">Deine Auswahlmöglichkeiten</h2>
+      <p class="mb-4">
+        Du kannst selbst entscheiden, welche Kategorien du zulässt. Diese Auswahl kannst du jederzeit über folgenden Link ändern:
+        <button onclick="window.showCookieSettings()" class="text-accent underline hover:text-white cursor-pointer bg-transparent border-none p-0">Cookie-Einstellungen ändern</button>
+        im Footer oder direkt hier 
+        <button onclick="window.resetCookieConsent()" class="text-accent underline hover:text-white cursor-pointer bg-transparent border-none p-0">Cookies zurücksetzen</button>.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-2 text-accent">Speicherdauer</h2>
+      <p class="mb-4">
+        Wenn du deine Auswahl triffst, speichern wir deine Entscheidung für 30 Tage in einem Cookie auf deinem Gerät.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-2 text-accent">Kontakt</h2>
+      <p class="mb-4">
+        Fragen zu dieser Richtlinie kannst du an <EmailReveal className="text-accent underline hover:text-white" label="E-Mail anzeigen" /> richten.
+      </p>
+    </div>
+    
+  </Container>
+</Layout>

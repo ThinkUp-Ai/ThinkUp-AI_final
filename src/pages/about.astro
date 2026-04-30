@@ -1,0 +1,183 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro'; 
+import { Image } from 'astro:assets'; 
+---
+
+<Layout 
+  title="Über uns | ThinkUp-AI" 
+  description="Das Team hinter ThinkUp-AI: Marc, Julius, Marcel und Leon. Unsere Mission ist die Automatisierung von Dienstleistern durch KI-Agenten."
+>
+  <section class="bg-black px-6 pb-20 pt-36 text-white">
+    <Container class="max-w-6xl">
+      <div class="flex flex-col items-center gap-10 text-center">
+        <div class="max-w-4xl">
+          <span class="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent">
+            Über ThinkUp-AI
+          </span>
+          <h1 class="mt-6 text-xl font-extrabold leading-tight md:text-2xl lg:text-3xl">
+            Wir bauen Agenten, damit Dienstleister sich wieder auf Kunden statt auf Terminchaos konzentrieren können.
+          </h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-white/72 mx-auto">
+            ThinkUp-AI entwickelt KI-Agenten für WhatsApp, Instagram und Telefon,
+            die Terminanfragen aufnehmen, Verfügbarkeiten prüfen und Buchungen
+            vorbereiten oder bestätigen. Ziel ist nicht mehr Technik um der Technik
+            willen, sondern spürbare Entlastung im Tagesgeschäft.
+          </p>
+        </div>
+
+        <div class="w-full max-w-5xl rounded-[2rem] border border-white/10 bg-white/5 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+          <div class="h-64 overflow-hidden rounded-[1.5rem] md:h-80">
+            <Image 
+              src={"/team.jpg"} 
+              alt="Das ThinkUp-AI Team: Marc, Julius, Marcel und Leon" 
+              width={1200} 
+              height={300} 
+              class="h-full w-full object-cover object-[center_32%]" 
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-[#f6f7f8] px-6 py-24 text-black">
+    <Container class="max-w-6xl">
+      <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <span class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-700">
+            Warum wir das bauen
+          </span>
+          <h2 class="mt-6 text-xl font-extrabold leading-tight md:text-3xl">
+            Gute Dienstleister verlieren jeden Tag Zeit an Dinge, die eigentlich automatisierbar sind.
+          </h2>
+        </div>
+
+        <div class="rounded-[2rem] border border-black/10 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <div class="space-y-6 text-lg leading-8 text-gray-700">
+            <p>
+              In vielen Betrieben entstehen Unterbrechungen nicht durch die eigentliche
+              Arbeit, sondern durch verpasste Anrufe, Rückfragen zu Terminen,
+              WhatsApp-Nachrichten zwischendurch und manuelle Abstimmung im Kalender.
+            </p>
+            <p>
+              Genau dort setzen wir an. Unsere Agenten übernehmen wiederkehrende
+              Kommunikations- und Buchungsaufgaben, damit weniger Anfragen verloren
+              gehen, Kunden schneller Antworten bekommen und Teams wieder mehr Ruhe
+              im Alltag haben.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-[#f6f7f8] px-6 py-24 text-black">
+    <Container class="max-w-6xl">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-700">
+          Wofür wir stehen
+        </span>
+        <h2 class="mt-6 text-xl font-extrabold leading-tight md:text-3xl">
+          Drei Prinzipien, an denen wir jedes Produkt messen.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <article class="rounded-[2rem] border border-black/10 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <h3 class="text-2xl font-bold">Einfache Nutzung statt Tool-Komplexität</h3>
+          <p class="mt-4 text-base leading-7 text-gray-700">
+            Ihre Kunden sollen über vertraute Kanäle wie WhatsApp, Instagram oder
+            Telefon buchen können. Kein komplizierter Umweg, keine neue Hürde.
+          </p>
+        </article>
+
+        <article class="rounded-[2rem] border border-black/10 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <h3 class="text-2xl font-bold">Automatisierung muss messbar entlasten</h3>
+          <p class="mt-4 text-base leading-7 text-gray-700">
+            Ein Agent ist nur dann sinnvoll, wenn weniger Unterbrechungen entstehen,
+            weniger Anfragen verloren gehen und der operative Aufwand im Alltag sinkt.
+          </p>
+        </article>
+
+        <article class="rounded-[2rem] border border-black/10 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <h3 class="text-2xl font-bold">Technik soll im Hintergrund arbeiten</h3>
+          <p class="mt-4 text-base leading-7 text-gray-700">
+            Die technische Komplexität bleibt bei uns. Für unsere Kunden soll sich
+            die Lösung wie ein sauberer, klarer Prozess anfühlen und nicht wie ein
+            weiteres System, das gepflegt werden muss.
+          </p>
+        </article>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-[#f6f7f8] px-6 py-24 text-black">
+    <Container class="max-w-6xl">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <span class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-700">
+            Vertrauen und Umsetzung
+          </span>
+          <h2 class="mt-6 text-xl font-extrabold leading-tight md:text-3xl">
+            Wir bauen keine generische KI-Demo, sondern einen produktiven Ablauf für echte Betriebe.
+          </h2>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h3 class="text-lg font-bold">Vertraute Kanäle</h3>
+            <p class="mt-3 text-sm leading-7 text-gray-700">
+              WhatsApp, Instagram und Telefon bleiben für Kunden einfach nutzbar.
+            </p>
+          </div>
+          <div class="rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h3 class="text-lg font-bold">Anbindung an bestehende Prozesse</h3>
+            <p class="mt-3 text-sm leading-7 text-gray-700">
+              Verfügbarkeiten, Kalenderlogik und Buchungsabläufe werden passend zum Betrieb eingerichtet.
+            </p>
+          </div>
+          <div class="rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h3 class="text-lg font-bold">Fokus auf Dienstleister</h3>
+            <p class="mt-3 text-sm leading-7 text-gray-700">
+              Unsere Produkte sind auf Unternehmen ausgelegt, bei denen Terminorganisation jeden Tag Zeit kostet.
+            </p>
+          </div>
+          <div class="rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h3 class="text-lg font-bold">Persönliche Einrichtung</h3>
+            <p class="mt-3 text-sm leading-7 text-gray-700">
+              Kein unpersönlicher Baukasten, sondern eine Lösung, die auf Ihren Ablauf abgestimmt wird.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-black px-6 py-24 text-white">
+    <Container class="max-w-5xl">
+      <div class="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center shadow-[0_25px_70px_rgba(0,0,0,0.25)]">
+        <span class="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent">
+          Nächster Schritt
+        </span>
+        <h2 class="mt-6 text-xl font-extrabold leading-tight md:text-3xl">
+          Wenn Sie sehen möchten, wie ein Agent in Ihrem Betrieb konkret aussehen kann, zeigen wir Ihnen das gerne in einer kurzen Demo.
+        </h2>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/72">
+          Sie bekommen keine allgemeine KI-Erklärung, sondern einen klaren Blick darauf,
+          wie Anfragen, Terminbuchung und Entlastung in Ihrem Alltag praktisch funktionieren können.
+        </p>
+        <div class="mt-10">
+          <a
+            href="/whatsapp"
+            class="inline-flex items-center justify-center rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-black transition hover:brightness-105"
+          >
+            Unsere KI-Agenten testen
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

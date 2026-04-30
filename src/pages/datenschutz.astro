@@ -1,0 +1,95 @@
+---
+// src/pages/datenschutz.astro
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+import EmailReveal from '../components/EmailReveal.astro';
+---
+
+<Layout 
+  title="Datenschutzerklärung – ThinkUp KI" 
+  description="Datenschutzerklärung der Himmelsbach, Koch, Müller & Schick GbR. Informationen zum Datenschutz und zu Cookies."
+>
+  
+  <Container class="mt-32 mb-20 max-w-4xl mx-auto"> 
+
+    <article class="prose dark:prose-invert max-w-none mx-auto text-center text-gray-300"> 
+      
+      <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold text-accent mb-8">Datenschutzerklärung</h1> 
+
+      <section class="mb-10 p-6 bg-white/5 rounded-2xl border border-white/10 text-center">
+        <h2 class="text-2xl font-semibold mb-4 text-accent">Verantwortliche Stelle</h2>
+        <p>
+          <strong>Himmelsbach, Koch, Müller & Schick GbR</strong><br />
+          Alemannenstraße 7<br />
+          78628 Rottweil<br />
+          E-Mail: <EmailReveal className="text-accent underline hover:text-white" label="E-Mail anzeigen" /><br />
+          Telefon: +49 15565 658472
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">1. Datenschutz auf einen Blick</h2>
+        <p>Allgemeine Hinweise zu Art, Umfang und Zweck der Verarbeitung personenbezogener Daten beim Besuch dieser Website.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">2. Erhebung und Speicherung personenbezogener Daten</h2>
+        <p>
+          Beim Aufruf der Website werden automatisch folgende Daten erhoben: IP-Adresse, Browsertyp und -version, verwendetes Betriebssystem,
+          Referrer-URL sowie die Uhrzeit der Serveranfrage.<br />
+          Diese Daten sind technisch erforderlich (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">3. Kontaktaufnahme</h2>
+        <p>Bei Kontaktaufnahme verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b DSGVO).</p>
+      </section>
+
+      <section class="my-12 py-8 border-y border-white/10">
+        <h2 class="text-2xl font-semibold mt-10 mb-2">4. Cookies</h2>
+        <p class="mb-6">
+          Unsere Website verwendet Cookies. Externe Medien wie YouTube oder 3D-Visualisierungen werden erst nach Ihrer Zustimmung geladen.<br /> 
+          Weitere Informationen finden Sie in unserer <a href="/cookie-richtlinie" class="text-accent underline hover:text-white">Cookie-Richtlinie</a>.<br />
+          Sie können Ihre Einstellungen hier jederzeit ändern:
+        </p>
+
+        <div class="flex flex-col items-center space-y-6">
+          <a href="/cookie-richtlinie" class="text-accent underline hover:text-white text-lg font-semibold cursor-pointer">
+            Cookie-Richtlinie lesen
+          </a>
+          
+          <button onclick="window.showCookieSettings()" class="text-accent underline hover:text-white text-lg font-semibold cursor-pointer bg-transparent border-none p-0">
+            Cookie-Einstellungen ändern
+          </button>
+
+          <button onclick="window.resetCookieConsent()" class="text-accent underline hover:text-white text-lg font-semibold cursor-pointer bg-transparent border-none p-0">
+            Cookies zurücksetzen
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">5. Einbindung von YouTube</h2>
+        <p>Anbieter ist die Google Ireland Limited. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-accent underline ml-1">YouTube-Datenschutzerklärung</a></p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">6. Ihre Rechte</h2>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Widerspruch Ihrer Daten.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">7. Auftragsverarbeitung & Hosting durch Vercel</h2>
+        <p>Hosting erfolgt bei Vercel Inc. (USA). <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-accent underline ml-1">Vercel Privacy Policy</a></p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mt-10 mb-2">8. Änderungen</h2>
+        <p class="italic">Stand: Dezember 2025</p>
+      </section>
+      
+    </article>
+    
+  </Container>
+</Layout>

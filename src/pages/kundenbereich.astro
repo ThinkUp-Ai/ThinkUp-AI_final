@@ -1,0 +1,816 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+
+const userEmail = Astro.cookies.get("thinkup_session")?.value;
+
+if (!userEmail) {
+  return Astro.redirect("/login");
+}
+---
+
+<Layout 
+  title="Kundenbereich | ThinkUp-AI" 
+  description="ThinkUp-AI Kundenbereich für Onboarding, Meta-Verbindung und Dashboard."
+>
+  <section class="min-h-screen bg-black px-6 pt-36 pb-24 text-white overflow-hidden">
+    <div class="absolute left-[-10rem] top-32 h-[420px] w-[420px] rounded-full bg-[#58FFE9]/10 blur-[120px]"></div>
+    <div class="absolute right-[-10rem] bottom-20 h-[420px] w-[420px] rounded-full bg-[#58FFE9]/10 blur-[120px]"></div>
+
+    <Container class="relative z-10 max-w-6xl">
+      <div class="flex flex-col gap-10">
+        
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span class="inline-flex rounded-full border border-[#58FFE9]/35 bg-[#58FFE9]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+              Kundenbereich
+            </span>
+
+            <h1 class="mt-6 text-4xl font-extrabold leading-tight md:text-6xl">
+              Willkommen bei 
+              <span class="text-[#58FFE9]"> ThinkUp-AI.</span>
+            </h1>
+
+            <p class="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">
+              Angemeldet als <span class="font-bold text-white">{userEmail}</span>.
+              Hier starten Sie Ihr Onboarding, verbinden Ihre Kanäle und verwalten später Ihren Agenten.
+            </p>
+          </div>
+
+          <a 
+            href="/api/logout"
+            class="inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-white/70 transition hover:border-[#58FFE9]/40 hover:text-[#58FFE9]"
+          >
+            Abmelden
+          </a>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+          
+          <aside class="rounded-[2rem] border border-[#58FFE9]/20 bg-white/5 p-6 shadow-[0_0_60px_rgba(88,255,233,0.10)]">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+              Status
+            </p>
+
+            <div class="mt-6 rounded-2xl border border-white/10 bg-black/50 p-5">
+              <p id="roadmap-title" class="text-lg font-bold text-white">Onboarding läuft</p>
+              <p id="roadmap-description" class="mt-2 text-sm leading-6 text-white/60">
+                Ihr Kundenaccount ist angelegt. Als nächstes werden die Unternehmensdaten übermittelt.
+              </p>
+            </div>
+
+            <div class="mt-8 relative">
+              <div class="absolute left-3 top-0 bottom-0 w-[2px] bg-white/10"></div>
+              <div id="roadmap-progress" class="absolute left-3 top-0 h-[54px] w-[2px] bg-[#58FFE9] shadow-[0_0_18px_rgba(88,255,233,0.9)] transition-all duration-700"></div>
+
+              <div class="flex flex-col gap-6">
+                <div class="relative flex items-start gap-4">
+                  <div class="z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[#58FFE9] text-xs font-black text-black shadow-[0_0_18px_rgba(88,255,233,0.85)]">
+                    ✓
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-white">Account erstellt</p>
+                    <p class="mt-1 text-xs text-[#58FFE9]/70">Abgeschlossen</p>
+                  </div>
+                </div>
+
+                <div class="relative flex items-start gap-4">
+                  <div id="step-company-icon" class="z-10 flex h-6 w-6 animate-pulse items-center justify-center rounded-full border-2 border-[#58FFE9] bg-black text-xs font-black text-[#58FFE9] shadow-[0_0_25px_rgba(88,255,233,0.8)]">
+                    2
+                  </div>
+                  <div>
+                    <p id="step-company-title" class="text-sm font-semibold text-[#58FFE9]">Unternehmensdaten</p>
+                    <p id="step-company-status" class="mt-1 text-xs text-white/50">Aktueller Schritt</p>
+                  </div>
+                </div>
+
+                <div class="relative flex items-start gap-4">
+                  <div id="step-meta-icon" class="z-10 flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-black text-xs font-bold text-white/40 transition-all duration-500">
+                    3
+                  </div>
+                  <div>
+                    <p id="step-meta-title" class="text-sm text-white/60 transition-all duration-500">Meta-Verbindung</p>
+                    <p id="step-meta-status" class="mt-1 text-xs text-white/35">Gesperrt bis Unternehmensdaten übermittelt wurden</p>
+                  </div>
+                </div>
+
+                <div class="relative flex items-start gap-4">
+                  <div class="z-10 flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-black text-xs font-bold text-white/40">
+                    4
+                  </div>
+                  <div>
+                    <p class="text-sm text-white/60">Agent eingerichtet</p>
+                    <p class="mt-1 text-xs text-white/35">Offen</p>
+                  </div>
+                </div>
+
+                <div class="relative flex items-start gap-4">
+                  <div class="z-10 flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-black text-xs font-bold text-white/40">
+                    5
+                  </div>
+                  <div>
+                    <p class="text-sm text-white/60">Agententest</p>
+                    <p class="mt-1 text-xs text-white/35">Offen</p>
+                  </div>
+                </div>
+
+                <div class="relative flex items-start gap-4">
+                  <div class="z-10 flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-black text-xs font-bold text-white/40">
+                    6
+                  </div>
+                  <div>
+                    <p class="text-sm text-white/60">Go Live</p>
+                    <p class="mt-1 text-xs text-white/35">Offen</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <main class="grid gap-6">
+            
+            <section class="rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+                Onboarding
+              </p>
+              <h2 class="mt-3 text-2xl font-extrabold text-white">
+                Ihre nächsten Schritte
+              </h2>
+
+              <div class="mt-8 grid gap-4 md:grid-cols-2">
+                <div id="card-company" class="rounded-2xl border border-[#58FFE9]/25 bg-[#58FFE9]/[0.04] p-5 shadow-[0_0_30px_rgba(88,255,233,0.08)] transition-all duration-500">
+                  <p class="font-bold text-white">1. Unternehmensdaten</p>
+                  <p class="mt-2 text-sm leading-6 text-white/60">
+                    Öffnungszeiten, Leistungen, Team, Regeln und Stil des Agenten hinterlegen.
+                  </p>
+                </div>
+
+                <div id="card-meta" class="rounded-2xl border border-white/10 bg-black/45 p-5 opacity-70 transition-all duration-500">
+                  <p class="font-bold text-white">2. Meta verbinden</p>
+                  <p class="mt-2 text-sm leading-6 text-white/60">
+                    WhatsApp Business und Instagram mit der ThinkUp-AI App verbinden.
+                  </p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-black/45 p-5 opacity-70">
+                  <p class="font-bold text-white">3. Agenten-Wissen prüfen</p>
+                  <p class="mt-2 text-sm leading-6 text-white/60">
+                    Wir testen Antworten, Terminlogik und Eskalation an Menschen.
+                  </p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-black/45 p-5 opacity-70">
+                  <p class="font-bold text-white">4. Livegang</p>
+                  <p class="mt-2 text-sm leading-6 text-white/60">
+                    Nach Freigabe geht der Agent live und übernimmt echte Kundenanfragen.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section id="company-section" class="rounded-[2rem] border border-[#58FFE9]/25 bg-[#58FFE9]/[0.04] p-6 md:p-8 shadow-[0_0_50px_rgba(88,255,233,0.08)]">
+              <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+                Unternehmensdaten
+              </p>
+
+              <h2 class="mt-3 text-2xl font-extrabold text-white">
+                Daten für Ihren KI-Agenten übermitteln
+              </h2>
+
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-white/65">
+                Diese Informationen helfen uns, Ihren Agenten korrekt einzurichten. Alle Felder mit rotem Stern sind Pflichtfelder.
+              </p>
+
+              <form id="company-form" class="mt-8 grid gap-7" novalidate>
+                
+                <div class="rounded-[1.5rem] border border-white/10 bg-black/30 p-5">
+                  <p class="text-sm font-bold uppercase tracking-[0.16em] text-[#58FFE9]">Basisdaten</p>
+
+                  <div class="mt-5 grid gap-5 md:grid-cols-2">
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Unternehmensname <span class="text-red-400">*</span></span>
+                      <input
+                        name="companyName"
+                        required
+                        placeholder="z. B. Barber House Rottweil"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Branche <span class="text-red-400">*</span></span>
+                      <input
+                        name="industry"
+                        required
+                        placeholder="z. B. Friseur, Barber, Kosmetik"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+                  </div>
+
+                  <div class="mt-5 grid gap-5 md:grid-cols-2">
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Name Chef / Inhaber <span class="text-red-400">*</span></span>
+                      <input
+                        name="ownerName"
+                        required
+                        placeholder="z. B. Max Mustermann"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Standort des Unternehmens <span class="text-red-400">*</span></span>
+                      <input
+                        name="businessLocation"
+                        required
+                        placeholder="Straße, PLZ, Ort"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+                  </div>
+
+                  <div class="mt-5 grid gap-5 md:grid-cols-2">
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">WhatsApp Nummer <span class="text-red-400">*</span></span>
+                      <input
+                        name="whatsappNumber"
+                        required
+                        placeholder="+49 ..."
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Instagram Profil <span class="text-red-400">*</span></span>
+                      <input
+                        name="instagramProfile"
+                        required
+                        placeholder="@unternehmen"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-white/10 bg-black/30 p-5">
+                  <p class="text-sm font-bold uppercase tracking-[0.16em] text-[#58FFE9]">Team & Kontakt</p>
+
+                  <div class="mt-5 grid gap-5 md:grid-cols-2">
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Mitarbeiteranzahl <span class="text-red-400">*</span></span>
+                      <input
+                        name="employeeCount"
+                        type="number"
+                        min="1"
+                        required
+                        placeholder="z. B. 5"
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                      />
+                    </label>
+
+                    <label class="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/45 p-4">
+                      <input
+                        id="single-contact-checkbox"
+                        name="singleContactForStore"
+                        type="checkbox"
+                        class="mt-1 h-4 w-4 accent-[#58FFE9]"
+                      />
+                      <span>
+                        <span class="block text-sm font-bold text-white">Nur eine Kontaktmöglichkeit für den ganzen Laden</span>
+                        <span class="mt-1 block text-xs leading-5 text-white/50">
+                          Aktivieren, wenn Kunden nicht einzelne Mitarbeitende kontaktieren sollen.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Mitarbeiter: Name, Rolle, Kontakt <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="employees"
+                      required
+                      rows="5"
+                      placeholder="Beispiel:
+Max Müller – Inhaber – 0176...
+Lisa Schneider – Friseurin – lisa@mail.de
+Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-white/10 bg-black/30 p-5">
+                  <p class="text-sm font-bold uppercase tracking-[0.16em] text-[#58FFE9]">Termine & Kalender</p>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Welche Kalender-App nutzen Sie? <span class="text-red-400">*</span></span>
+                    <select
+                      name="calendarApp"
+                      required
+                      class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition focus:border-[#58FFE9]/60"
+                    >
+                      <option value="">Bitte auswählen</option>
+                      <option value="google_calendar">Google Kalender</option>
+                      <option value="outlook_calendar">Outlook Kalender</option>
+                      <option value="apple_calendar">Apple Kalender</option>
+                      <option value="planity">Planity</option>
+                      <option value="treatwell">Treatwell</option>
+                      <option value="other">Andere Kalender-App</option>
+                    </select>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Öffnungszeiten <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="openingHours"
+                      required
+                      rows="3"
+                      placeholder="z. B. Mo-Fr 09:00-18:00, Sa 09:00-14:00"
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Leistungen & Preise <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="services"
+                      required
+                      rows="4"
+                      placeholder="z. B. Herrenhaarschnitt 25 €, Bart 15 €, Waschen/Schneiden/Föhnen 45 € ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Wichtige Regeln für Terminbuchungen <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="bookingRules"
+                      required
+                      rows="4"
+                      placeholder="z. B. Termine nur mit Vorlauf, bestimmte Leistungen nur bei bestimmten Mitarbeitenden, Pausen, Stornoregeln ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Regelungen für Stornierungen <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="cancellationRules"
+                      required
+                      rows="3"
+                      placeholder="z. B. Stornierung bis 24h vorher möglich, danach Ausfallgebühr, Umbuchung telefonisch ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Wann sollen Terminerinnerungen verschickt werden? <span class="text-red-400">*</span></span>
+                    <select
+                      name="reminderTiming"
+                      required
+                      class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition focus:border-[#58FFE9]/60"
+                    >
+                      <option value="">Bitte auswählen</option>
+                      <option value="24h">24 Stunden vorher</option>
+                      <option value="24h_1h">24 Stunden und 1 Stunde vorher</option>
+                      <option value="48h_24h">48 Stunden und 24 Stunden vorher</option>
+                      <option value="custom">Individuell festlegen</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-white/10 bg-black/30 p-5">
+                  <p class="text-sm font-bold uppercase tracking-[0.16em] text-[#58FFE9]">Wissen & FAQ</p>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Häufige Kundenfragen <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="faq"
+                      required
+                      rows="5"
+                      placeholder="z. B. Parkmöglichkeiten, Kartenzahlung, Beratung, Produkte, Wartezeiten ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Was darf der Agent NICHT beantworten? <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="forbiddenTopics"
+                      required
+                      rows="3"
+                      placeholder="z. B. medizinische Beratung, Rabatte ohne Freigabe, Beschwerden immer an Mensch weitergeben ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-[#58FFE9]/20 bg-[#58FFE9]/[0.04] p-5">
+                  <p class="text-sm font-bold uppercase tracking-[0.16em] text-[#58FFE9]">Stil des Agenten</p>
+
+                  <label class="mt-5 block">
+                    <span class="text-sm font-bold text-white">Kurzbeschreibung des gewünschten Schreibstils <span class="text-red-400">*</span></span>
+                    <textarea
+                      name="agentStyleDescription"
+                      required
+                      rows="4"
+                      placeholder="z. B. locker, freundlich, modern, nicht zu förmlich, Kunden duzen, kurze Antworten, wenige Emojis ..."
+                      class="required-field mt-2 w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition placeholder:text-white/35 focus:border-[#58FFE9]/60"
+                    ></textarea>
+                  </label>
+
+                  <div class="mt-6 grid gap-6 md:grid-cols-2">
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Ansprache <span class="text-red-400">*</span></span>
+                      <select
+                        name="addressStyle"
+                        required
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition focus:border-[#58FFE9]/60"
+                      >
+                        <option value="">Bitte auswählen</option>
+                        <option value="du">Du</option>
+                        <option value="sie">Sie</option>
+                        <option value="mixed">Situativ / nach Kunde</option>
+                      </select>
+                    </label>
+
+                    <label class="block">
+                      <span class="text-sm font-bold text-white">Emoji-Nutzung <span class="text-red-400">*</span></span>
+                      <select
+                        name="emojiUsage"
+                        required
+                        class="required-field mt-2 w-full rounded-2xl border border-white/10 bg-black/45 px-4 py-4 text-white outline-none transition focus:border-[#58FFE9]/60"
+                      >
+                        <option value="">Bitte auswählen</option>
+                        <option value="none">Keine Emojis</option>
+                        <option value="few">Wenige Emojis</option>
+                        <option value="normal">Normal</option>
+                        <option value="many">Viele Emojis</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <div class="mt-6 grid gap-6">
+                    <label class="block">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-white">Nachrichtenlänge <span class="text-red-400">*</span></span>
+                        <span class="text-xs text-white/45">Kurz → Lang</span>
+                      </div>
+                      <input
+                        name="messageLength"
+                        type="range"
+                        min="1"
+                        max="5"
+                        value="3"
+                        required
+                        class="required-field mt-3 w-full accent-[#58FFE9]"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-white">Humor <span class="text-red-400">*</span></span>
+                        <span class="text-xs text-white/45">Sachlich → Locker</span>
+                      </div>
+                      <input
+                        name="humorLevel"
+                        type="range"
+                        min="1"
+                        max="5"
+                        value="2"
+                        required
+                        class="required-field mt-3 w-full accent-[#58FFE9]"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-white">Seriosität <span class="text-red-400">*</span></span>
+                        <span class="text-xs text-white/45">Locker → Sehr seriös</span>
+                      </div>
+                      <input
+                        name="seriousnessLevel"
+                        type="range"
+                        min="1"
+                        max="5"
+                        value="4"
+                        required
+                        class="required-field mt-3 w-full accent-[#58FFE9]"
+                      />
+                    </label>
+
+                    <label class="block">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-white">Strenge bei Regeln <span class="text-red-400">*</span></span>
+                        <span class="text-xs text-white/45">Flexibel → Streng</span>
+                      </div>
+                      <input
+                        name="ruleStrictness"
+                        type="range"
+                        min="1"
+                        max="5"
+                        value="4"
+                        required
+                        class="required-field mt-3 w-full accent-[#58FFE9]"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <p id="company-error" class="hidden rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+                  Bitte füllen Sie alle Pflichtfelder aus.
+                </p>
+
+                <button
+                  type="submit"
+                  class="mt-2 rounded-full bg-[#58FFE9] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(88,255,233,0.6)]"
+                >
+                  Unternehmensdaten übermitteln
+                </button>
+
+                <p id="company-status" class="text-xs leading-5 text-white/45"></p>
+              </form>
+            </section>
+
+            <section id="meta-section" class="rounded-[2rem] border border-white/10 bg-white/5 p-6 opacity-80 transition-all duration-500 md:p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+                Meta Verbindung
+              </p>
+
+              <h2 class="mt-3 text-2xl font-extrabold text-white">
+                WhatsApp und Instagram verbinden
+              </h2>
+
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-white/65">
+                Verbinden Sie Ihre Kanäle mit ThinkUp-AI, damit Ihr Agent später Nachrichten über WhatsApp und Instagram verarbeiten kann.
+              </p>
+
+              <button 
+                id="meta-signup-button"
+                type="button"
+                disabled
+                class="mt-6 inline-flex cursor-not-allowed items-center gap-3 rounded-full border border-white/10 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white/45 transition"
+              >
+                <span id="meta-lock-icon" aria-hidden="true">🔒</span>
+                WhatsApp & Instagram verbinden
+              </button>
+
+              <p id="meta-unlock-hint" class="mt-4 text-xs leading-5 text-white/45">
+                Diese Verbindung wird freigeschaltet, sobald die Unternehmensdaten übermittelt wurden.
+              </p>
+
+              <p id="meta-status" class="mt-4 text-xs leading-5 text-white/45"></p>
+            </section>
+
+            <section class="rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
+                Abrechnung
+              </p>
+              <h2 class="mt-3 text-2xl font-extrabold text-white">
+                Abo und Zahlungsstatus
+              </h2>
+
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                <div class="rounded-2xl border border-white/10 bg-black/45 p-5">
+                  <p class="text-sm text-white/50">Paket</p>
+                  <p class="mt-2 text-lg font-bold text-white">Onboarding</p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-black/45 p-5">
+                  <p class="text-sm text-white/50">Status</p>
+                  <p class="mt-2 text-lg font-bold text-[#58FFE9]">Aktiv</p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-black/45 p-5">
+                  <p class="text-sm text-white/50">Nächste Fälligkeit</p>
+                  <p class="mt-2 text-lg font-bold text-white">Noch offen</p>
+                </div>
+              </div>
+            </section>
+
+          </main>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>
+
+<script>
+  let companyDataSubmitted = false;
+
+  const companyForm = document.getElementById("company-form");
+  const companyStatus = document.getElementById("company-status");
+  const companyError = document.getElementById("company-error");
+
+  const roadmapTitle = document.getElementById("roadmap-title");
+  const roadmapDescription = document.getElementById("roadmap-description");
+  const roadmapProgress = document.getElementById("roadmap-progress");
+
+  const stepCompanyIcon = document.getElementById("step-company-icon");
+  const stepCompanyTitle = document.getElementById("step-company-title");
+  const stepCompanyStatus = document.getElementById("step-company-status");
+
+  const stepMetaIcon = document.getElementById("step-meta-icon");
+  const stepMetaTitle = document.getElementById("step-meta-title");
+  const stepMetaStatus = document.getElementById("step-meta-status");
+
+  const cardCompany = document.getElementById("card-company");
+  const cardMeta = document.getElementById("card-meta");
+
+  const metaSection = document.getElementById("meta-section");
+  const metaButton = document.getElementById("meta-signup-button");
+  const metaLockIcon = document.getElementById("meta-lock-icon");
+  const metaUnlockHint = document.getElementById("meta-unlock-hint");
+  const metaStatus = document.getElementById("meta-status");
+
+  const singleContactCheckbox = document.getElementById("single-contact-checkbox");
+
+  const appId = import.meta.env.PUBLIC_META_APP_ID;
+  const configId = import.meta.env.PUBLIC_META_CONFIG_ID;
+
+  function validateCompanyForm(form) {
+    const fields = form.querySelectorAll(".required-field");
+    let isValid = true;
+
+    fields.forEach((field) => {
+      const value = field.value.trim();
+
+      if (!value) {
+        isValid = false;
+        field.classList.remove("border-white/10");
+        field.classList.add("border-red-400", "focus:border-red-400");
+      } else {
+        field.classList.remove("border-red-400", "focus:border-red-400");
+        field.classList.add("border-white/10");
+      }
+    });
+
+    return isValid;
+  }
+
+  companyForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const isValid = validateCompanyForm(form);
+
+    if (!isValid) {
+      if (companyError) companyError.classList.remove("hidden");
+      if (companyStatus) companyStatus.textContent = "";
+      return;
+    }
+
+    if (companyError) companyError.classList.add("hidden");
+
+    const formData = new FormData(form);
+    const companyData = Object.fromEntries(formData.entries());
+
+    companyData.singleContactForStore = singleContactCheckbox?.checked ? "true" : "false";
+
+    console.log("Unternehmensdaten:", companyData);
+
+    companyDataSubmitted = true;
+
+    if (companyStatus) {
+      companyStatus.textContent = "Unternehmensdaten wurden übermittelt. Die Meta-Verbindung ist jetzt freigeschaltet.";
+    }
+
+    if (roadmapTitle) roadmapTitle.textContent = "Meta-Verbindung offen";
+    if (roadmapDescription) {
+      roadmapDescription.textContent = "Ihre Unternehmensdaten wurden übermittelt. Als nächstes verbinden Sie WhatsApp und Instagram.";
+    }
+    if (roadmapProgress) roadmapProgress.style.height = "118px";
+
+    stepCompanyIcon?.classList.remove("animate-pulse", "border-2", "border-[#58FFE9]", "bg-black", "text-[#58FFE9]");
+    stepCompanyIcon?.classList.add("bg-[#58FFE9]", "text-black", "shadow-[0_0_18px_rgba(88,255,233,0.85)]");
+    if (stepCompanyIcon) stepCompanyIcon.textContent = "✓";
+
+    stepCompanyTitle?.classList.remove("text-[#58FFE9]");
+    stepCompanyTitle?.classList.add("text-white");
+    if (stepCompanyStatus) {
+      stepCompanyStatus.textContent = "Abgeschlossen";
+      stepCompanyStatus.className = "mt-1 text-xs text-[#58FFE9]/70";
+    }
+
+    stepMetaIcon?.classList.remove("border", "border-white/20", "text-white/40");
+    stepMetaIcon?.classList.add("animate-pulse", "border-2", "border-[#58FFE9]", "text-[#58FFE9]", "shadow-[0_0_25px_rgba(88,255,233,0.8)]");
+    if (stepMetaIcon) stepMetaIcon.textContent = "3";
+
+    stepMetaTitle?.classList.remove("text-white/60");
+    stepMetaTitle?.classList.add("font-semibold", "text-[#58FFE9]");
+    if (stepMetaStatus) {
+      stepMetaStatus.textContent = "Aktueller Schritt";
+      stepMetaStatus.className = "mt-1 text-xs text-white/50";
+    }
+
+    cardCompany?.classList.remove("border-[#58FFE9]/25", "bg-[#58FFE9]/[0.04]", "shadow-[0_0_30px_rgba(88,255,233,0.08)]");
+    cardCompany?.classList.add("border-white/10", "bg-black/45", "opacity-80");
+
+    cardMeta?.classList.remove("border-white/10", "bg-black/45", "opacity-70");
+    cardMeta?.classList.add("border-[#58FFE9]/25", "bg-[#58FFE9]/[0.04]", "shadow-[0_0_30px_rgba(88,255,233,0.08)]");
+
+    metaSection?.classList.remove("border-white/10", "bg-white/5", "opacity-80");
+    metaSection?.classList.add("border-[#58FFE9]/20", "bg-[#58FFE9]/[0.04]");
+
+    if (metaButton instanceof HTMLButtonElement) {
+      metaButton.disabled = false;
+      metaButton.className = "mt-6 inline-flex items-center gap-3 rounded-full bg-[#58FFE9] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(88,255,233,0.6)]";
+    }
+
+    if (metaLockIcon) metaLockIcon.textContent = "🔓";
+    if (metaUnlockHint) metaUnlockHint.textContent = "Freigeschaltet. Sie können jetzt WhatsApp und Instagram verbinden.";
+  });
+
+  companyForm?.addEventListener("input", (event) => {
+    const target = event.target;
+
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) {
+      if (target.value.trim()) {
+        target.classList.remove("border-red-400", "focus:border-red-400");
+        target.classList.add("border-white/10");
+      }
+    }
+  });
+
+  function setMetaStatus(message) {
+    if (metaStatus) {
+      metaStatus.textContent = message;
+    }
+  }
+
+  function loadFacebookSdk() {
+    return new Promise((resolve) => {
+      if (window.FB) {
+        resolve(window.FB);
+        return;
+      }
+
+      window.fbAsyncInit = function () {
+        window.FB.init({
+          appId,
+          cookie: true,
+          xfbml: true,
+          version: "v19.0",
+        });
+
+        resolve(window.FB);
+      };
+
+      const existingScript = document.getElementById("facebook-jssdk");
+      if (existingScript) return;
+
+      const script = document.createElement("script");
+      script.id = "facebook-jssdk";
+      script.src = "https://connect.facebook.net/de_DE/sdk.js";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    });
+  }
+
+  metaButton?.addEventListener("click", async () => {
+    if (!companyDataSubmitted) {
+      setMetaStatus("Bitte übermitteln Sie zuerst Ihre Unternehmensdaten.");
+      return;
+    }
+
+    setMetaStatus("Meta-Verbindung wird geöffnet...");
+
+    if (!appId || !configId) {
+      setMetaStatus("Meta App ID oder Config ID fehlt in der .env Datei.");
+      return;
+    }
+
+    const FB = await loadFacebookSdk();
+
+    FB.login(
+      function (response) {
+        console.log("Meta response:", response);
+
+        if (response.authResponse?.code) {
+          setMetaStatus("Meta Verbindung erfolgreich. Code erhalten. Nächster Schritt: serverseitig speichern.");
+          console.log("Meta auth code:", response.authResponse.code);
+          return;
+        }
+
+        if (response.authResponse) {
+          setMetaStatus("Meta Login erfolgreich, aber kein Code erhalten.");
+          return;
+        }
+
+        setMetaStatus("Meta Verbindung wurde abgebrochen.");
+      },
+      {
+        config_id: configId,
+        response_type: "code",
+        override_default_response_type: true,
+        extras: {
+          setup: {},
+        },
+      }
+    );
+  });
+</script>

@@ -1,0 +1,70 @@
+---
+import Header from '../components/Header.astro';
+import HeroGlow from '../components/HeroGlow.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import Personas from '../components/Personas.astro';
+import N8nSection from '../components/n8n.astro';
+import JourneyZoom from '../components/JourneyZoom.astro';
+import SplineSection from '../components/SplineSection.astro';
+import Products from '../components/Products.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import AosSetup from '../components/AosSetup.astro'; 
+import PremiumChatDemo from '../components/home/PremiumChatDemo';
+import PartnerSlider from "../components/PartnerSlider.astro";
+---
+
+<html lang="de" class="overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThinkUp AI – Startseite</title>
+  </head>
+
+  <body class="bg-black text-white overflow-x-hidden font-sans">
+    <AosSetup />
+    <Header />
+
+    <!-- HERO -->
+    <section class="bg-black text-white py-5">
+      <HeroGlow />
+    </section>
+
+    <PremiumChatDemo client:load />
+
+    <CookieConsent />
+
+    <!-- PERSONAS -->
+    <section class="bg-white text-white py-24">
+      <Personas />
+    </section>
+
+    <!-- 🔥 SOCIAL PROOF direkt danach -->
+    <PartnerSlider />
+
+    <!-- N8N / SYSTEM -->
+    <N8nSection />
+
+    <!-- JOURNEY -->
+    <section class="bg-black text-white py-24">
+      <JourneyZoom />
+    </section>
+
+    <!-- 🔥 TESTIMONIALS (ersetzt Brain Section) -->
+    <SplineSection />
+
+    <!-- PRODUKTE -->
+    <section class="bg-black text-white py-24 px-6">
+      <Products />
+    </section>
+
+    <!-- FAQ -->
+    <FAQ />
+
+    <!-- FOOTER -->
+    <section class="bg-black text-white py-16">
+      <Footer />
+    </section>
+
+  </body>
+</html>

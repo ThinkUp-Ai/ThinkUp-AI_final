@@ -1,0 +1,76 @@
+---
+// src/components/Personas.astro
+import Container from './Container.astro';
+// Wichtig: Importiere die Image Komponente für die Bildoptimierung
+import { Image } from 'astro:assets';
+
+// Definiere die 4 fokussierten Personas und ihre Bildpfade
+const personas = [
+    {
+        name: "Mehmet (Barber)",
+        image: "/personas/Mehmet.png", 
+        title: "Barbershop",
+        situation: "Muss Anrufe während der Arbeit annehmen. Termine und Rückfragen bringen ihn aus dem Flow.",
+        potential: "Termine automatisch buchen. Anfragen automatisch beantworten. Mehmet arbeitet ohne Unterbrechungen.",
+    },
+    {
+        name: "Bettina (Studioleitung)",
+        image: "/personas/Bettina.png", 
+        title: "Nagelstudio & Kosmetik",
+        situation: "Verpasst Anfragen außerhalb der Öffnungszeiten.",
+        potential: "Termine automatisch buchen. Anfragen automatisch beantworten. 24/7 ohne manuellen Aufwand."
+    },
+    {
+        name: "Daniel (IT-Berater)",
+        image: "/personas/Daniel.png", 
+        title: "IT-Dienstleister (B2B)",
+        situation: "Ständige Standardfragen blockieren den Fokus auf Projekte.",
+        potential: "Anfragen automatisch beantworten und vorqualifizieren. Dringendes geht an Daniel."
+    },
+    {
+        name: "Jonas (Agentur)",
+        image: "/personas/Jonas.png", 
+        title: "Kreativ-Agentur",
+        situation: "Wiederkehrende Kundenfragen und Erstberatung kosten Zeit.",
+        potential: "Anfragen automatisch beantworten. Terminanfragen automatisch buchen. Das Team ist deutlich entlastet."
+    },
+];
+---
+
+<Container class="max-w-6xl py-16 md:py-24 text-center">
+    <h2 class="mb-4 text-4xl font-extrabold text-gray-900">
+        Für Dienstleister mit Termin-Engpass
+    </h2>
+    <p class="mb-16 text-xl text-gray-500">
+        Weniger Unterbrechungen. mehr Buchungen, weniger manueller Aufwand.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {personas.map((persona) => (
+            <div class="flex h-full flex-col items-center rounded-xl border border-white/30 bg-[#ccc] p-6 shadow-lg">
+                
+                <div class="mb-4 h-40 w-40 overflow-hidden rounded-xl">
+                    <Image 
+                        src={persona.image} 
+                        alt={`Porträt von ${persona.name}`} 
+                        width={160} 
+                        height={160}
+                        class="object-cover w-full h-full"
+                    />
+                </div>
+
+                <h3 class="mb-1 text-lg font-semibold text-[#0b0b0b]">{persona.name}</h3>
+                <h4 class="mb-4 text-sm text-[#0b0b0b]/75">{persona.title}</h4>
+
+                <div class="w-full space-y-4 text-left text-sm text-[#0b0b0b]/85">
+                    <p>
+                        <strong class="text-[#0b0b0b]">Ausgangssituation:</strong> {persona.situation}
+                    </p>
+                    <p>
+                        <strong class="text-[#0b0b0b]">AI-Potenzial:</strong> {persona.potential}
+                    </p>
+                </div>
+            </div>
+        ))}
+    </div>
+</Container>

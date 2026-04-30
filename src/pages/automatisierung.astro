@@ -1,0 +1,409 @@
+---
+// src/pages/automatisierung.astro
+import Layout from '../layouts/Layout.astro'; 
+import Container from '../components/Container.astro';
+---
+
+<Layout title="Terminautomatisierung für Dienstleister | ThinkUp" description="Termine automatisch buchen. Anfragen automatisch beantworten.">
+  
+  <section class="py-24 md:py-32 px-6 bg-black text-white overflow-x-hidden flex flex-col items-center"> 
+    <Container class="flex flex-col items-center text-center"> 
+        <div class="max-w-[280px] sm:max-w-md md:max-w-3xl w-full flex flex-col items-center" data-aos="fade-down">
+          <h1 class="font-extrabold mb-6 tracking-tight md:whitespace-nowrap">
+            <span class="text-accent text-2xl md:text-4xl lg:text-5xl">Termine automatisch buchen</span>
+            <span class="block text-xl md:text-3xl lg:text-4xl">und Anfragen automatisch beantworten</span>
+          </h1>
+          <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <a href="/whatsapp" class="inline-block rounded-full bg-accent px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-lg transition-all hover:scale-105 hover:bg-white">
+              Unsere KI-Agenten testen
+            </a>
+            <a href="/buchen" class="inline-block rounded-full border border-white/20 bg-white/5 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:border-accent hover:text-accent">
+              Produkt anfragen
+            </a>
+          </div>
+        </div>
+    </Container>
+  </section>
+
+  <section class="py-24 px-6 bg-[#1f1f1f] text-white border-t border-white/10">
+    <Container class="max-w-7xl">
+      <div class="mb-14 max-w-4xl rounded-[2rem] border border-white/10 bg-[#2a2a2a] p-8 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.2)]">
+        <span class="inline-flex items-center rounded-full border border-accent/20 bg-black/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent shadow-sm">
+          Unsere Produkte
+        </span>
+        <h2 class="mt-6 text-3xl md:text-5xl font-extrabold tracking-tight text-white">
+          Welche AI-Produkte wir anbieten
+        </h2>
+        <p class="mt-5 text-base md:text-lg leading-8 text-white/75">
+          Je nach Kanal übernimmt der Agent andere Aufgaben: schriftliche Anfragen beantworten,
+          Termine automatisch buchen, Leads vorqualifizieren oder komplette Abläufe individuell
+          für Ihr Unternehmen abbilden.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
+        <article class="group flex h-full flex-col rounded-[2rem] border border-white/10 bg-[#262626] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_25px_70px_rgba(88,255,233,0.15)]">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#25D366]/10 text-2xl">💬</div>
+          <h3 class="text-2xl font-bold text-white">WhatsApp Agent</h3>
+          <div class="mt-4 flex-1 rounded-[1.5rem] border border-white/10 bg-[#343434] p-5">
+            <p class="text-sm leading-7 text-white/75">
+              Beantwortet Anfragen sofort, prüft Verfügbarkeiten, bestätigt Termine
+              automatisch und entlastet Ihr Team im Tagesgeschäft.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-white/80">
+              <li>Preise, Verfügbarkeit und Standardfragen automatisch beantworten</li>
+              <li>Termine annehmen und bestätigen</li>
+              <li>Follow-ups und Erinnerungen verschicken</li>
+            </ul>
+          </div>
+          <a href="/whatsapp" class="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:brightness-110 group-hover:translate-x-1">
+            Teste unseren WhatsApp Agent
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="group flex h-full flex-col rounded-[2rem] border border-white/10 bg-[#262626] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_25px_70px_rgba(88,255,233,0.15)]">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E1306C]/10 text-2xl">📲</div>
+          <h3 class="text-2xl font-bold text-white">Instagram Agent</h3>
+          <div class="mt-4 flex-1 rounded-[1.5rem] border border-white/10 bg-[#343434] p-5">
+            <p class="text-sm leading-7 text-white/75">
+              Reagiert auf Direktnachrichten, filtert ernsthafte Anfragen heraus und
+              führt Interessenten strukturiert weiter zur Beratung oder Buchung.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-white/80">
+              <li>DMs automatisch beantworten und vorsortieren</li>
+              <li>Leads qualifizieren statt nur Nachrichten sammeln</li>
+              <li>Social-Anfragen in klare nächste Schritte überführen</li>
+            </ul>
+          </div>
+          <a href="/instagram" class="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:brightness-110 group-hover:translate-x-1">
+            Teste unseren Instagram Agent
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="group flex h-full flex-col rounded-[2rem] border border-white/10 bg-[#262626] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_25px_70px_rgba(88,255,233,0.15)]">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0ea5e9]/10 text-2xl">📞</div>
+          <h3 class="text-2xl font-bold text-white">Telefon Agent</h3>
+          <div class="mt-4 flex-1 rounded-[1.5rem] border border-white/10 bg-[#343434] p-5">
+            <p class="text-sm leading-7 text-white/75">
+              Nimmt Anrufe an, führt natürliche Gespräche, prüft freie Slots und
+              übergibt nur relevante Anliegen an Ihr Team.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-white/80">
+              <li>Termine per Telefon automatisiert buchen</li>
+              <li>Leads und Anfragen vorqualifizieren</li>
+              <li>Außerhalb der Öffnungszeiten erreichbar bleiben</li>
+            </ul>
+          </div>
+          <a href="/telefon" class="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:brightness-110 group-hover:translate-x-1">
+            Teste unseren Telefon Agent
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="group flex h-full flex-col rounded-[2rem] border border-white/10 bg-[#262626] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_25px_70px_rgba(88,255,233,0.15)]">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-black/5 text-2xl">⚙️</div>
+          <h3 class="text-2xl font-bold text-white">Individuelle Lösung</h3>
+          <div class="mt-4 flex-1 rounded-[1.5rem] border border-white/10 bg-[#343434] p-5">
+            <p class="text-sm leading-7 text-white/75">
+              Wenn Ihr Prozess spezieller ist, bauen wir eine individuelle Automatisierung
+              mit den passenden Kanälen, Regeln, Schnittstellen und Workflows.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-white/80">
+              <li>CRM, Kalender, E-Mail und interne Tools verbinden</li>
+              <li>Mehrstufige Workflows für Ihr Unternehmen aufbauen</li>
+              <li>Individuelle Agentenlogik statt Standard-Setup</li>
+            </ul>
+          </div>
+          <a href="/kontakt" class="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:brightness-110 group-hover:translate-x-1">
+            Frage deine individuelle Lösung an
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-[#f6f7f8] px-6 py-24 text-black">
+    <Container class="max-w-6xl">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-700">
+          Vorher und Nachher
+        </span>
+        <h2 class="mt-6 text-xl font-extrabold leading-tight md:text-3xl">
+          Was sich im Alltag verändert, wenn Terminorganisation nicht mehr ständig dazwischenfunkt.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <article class="rounded-[2rem] border border-red-200/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <span class="inline-flex rounded-full bg-red-50 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-red-600">
+            Vorher
+          </span>
+          <ul class="mt-6 space-y-4 text-base leading-7 text-gray-700">
+            <li>Terminanfragen kommen parallel über verschiedene Kanäle rein und müssen manuell beantwortet werden.</li>
+            <li>Verpasste Anrufe und späte Rückmeldungen kosten Umsatz und führen zu Absprüngen.</li>
+            <li>Rückfragen zu Uhrzeiten, Preisen oder Verfügbarkeiten unterbrechen laufende Arbeit ständig.</li>
+            <li>Erinnerungen, Umbuchungen und Bestätigungen werden nebenbei organisiert oder vergessen.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-[2rem] border border-emerald-200/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+          <span class="inline-flex rounded-full bg-emerald-50 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-emerald-700">
+            Nachher
+          </span>
+          <ul class="mt-6 space-y-4 text-base leading-7 text-gray-700">
+            <li>Anfragen werden automatisch aufgenommen, vorsortiert und in einen klaren Ablauf geführt.</li>
+            <li>Kunden bekommen schneller Antworten, während das Team sich auf Service und Leistung konzentriert.</li>
+            <li>Termine werden strukturierter vorbereitet oder direkt bestätigt, ohne dauernde manuelle Abstimmung.</li>
+            <li>Der Alltag wird planbarer, weil weniger Anfragen verloren gehen und weniger Unterbrechungen entstehen.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="mt-10 rounded-[2rem] border border-black/10 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
+        <h3 class="text-2xl font-bold">Grobe Rechnung zur Entlastung</h3>
+        <p class="mt-4 text-base leading-8 text-gray-700">
+          Wenn durch automatische Antworten, weniger Rückrufe und sauber vorbereitete
+          Terminbuchungen nur <span class="font-semibold text-black">30 Minuten pro Werktag</span>
+          eingespart werden, sind das bei rund 22 Arbeitstagen bereits
+          <span class="font-semibold text-black"> etwa 11 Stunden pro Monat</span>.
+          Schon diese Größenordnung zeigt, wie schnell sich weniger Unterbrechungen
+          operativ bemerkbar machen können.
+        </p>
+      </div>
+    </Container>
+  </section>
+  
+  <section class="py-24 px-4 md:px-6 bg-black text-white border-t border-white/10">
+    <Container class="max-w-7xl">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="p-6 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/10 bg-gray-900/40 relative min-h-[650px] md:min-h-[750px] overflow-hidden shadow-2xl order-2 lg:order-1" id="mas-visualizer">
+                
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="mas-svg">
+                    <line id="line-1" stroke="rgba(88,255,233,0.4)" stroke-width="2" stroke-dasharray="6,4" />
+                    <line id="line-comm" stroke="rgba(249,115,22,0.5)" stroke-width="2.5" />
+                    <line id="line-termin" stroke="rgba(59,130,246,0.5)" stroke-width="2.5" />
+                    <line id="line-info" stroke="rgba(168,85,247,0.5)" stroke-width="2.5" />
+                    <path id="path-return" stroke="#22c55e" stroke-width="4" stroke-dasharray="12,6" fill="none" class="opacity-0 transition-opacity duration-1000" />
+                </svg>
+
+                <div class="relative z-10">
+                    <div class="flex flex-col items-center mt-12 relative">
+                        <div id="icon-whatsapp" class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gray-800 border-2 border-green-500/50 flex items-center justify-center text-3xl md:text-4xl shadow-lg transition-all duration-700">💬</div>
+                        <div id="bubble-whatsapp" class="absolute top-full mt-4 bg-gray-800 border-2 border-green-500 text-white text-[10px] md:text-[11px] font-bold px-3 py-1.5 rounded-xl opacity-0 transition-all shadow-2xl max-w-[80vw] text-center z-50">"Termin morgen?"</div>
+                    </div>
+
+                    <div class="flex justify-center my-20 md:my-32 relative">
+                        <div id="icon-leader" class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-800 border-2 border-accent/50 flex items-center justify-center text-4xl md:text-5xl shadow-xl transition-all duration-700">🤖</div>
+                        <div id="bubble-leader" class="absolute -top-16 left-1/2 -translate-x-1/2 bg-gray-800 border-2 border-accent text-white text-[10px] md:text-[11px] font-bold px-3 py-1.5 rounded-xl opacity-0 transition-all max-w-[80vw] text-center shadow-2xl whitespace-nowrap">Bereit...</div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 md:gap-4 px-2 mb-10">
+                        <div class="flex flex-col items-center relative">
+                            <div id="icon-comm" class="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gray-800 border-2 border-orange-500/60 flex items-center justify-center text-2xl md:text-3xl transition-all duration-700">✍️</div>
+                            <div id="bubble-comm" class="absolute -top-12 left-0 bg-gray-800 border-2 border-orange-500 text-white text-[8px] md:text-[9px] font-bold px-2 py-1.5 rounded-lg opacity-0 transition-all whitespace-nowrap shadow-2xl">Bereit...</div>
+                        </div>
+                        <div class="flex flex-col items-center relative">
+                            <div id="icon-termin" class="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gray-800 border-2 border-blue-500/60 flex items-center justify-center text-2xl md:text-3xl transition-all duration-700">📅</div>
+                            <div id="bubble-termin" class="absolute -top-12 left-1/2 -translate-x-1/2 bg-gray-800 border-2 border-blue-500 text-white text-[8px] md:text-[9px] font-bold px-2 py-1.5 rounded-lg opacity-0 transition-all whitespace-nowrap shadow-2xl">Bereit...</div>
+                        </div>
+                        <div class="flex flex-col items-center relative">
+                            <div id="icon-info" class="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gray-800 border-2 border-purple-500/60 flex items-center justify-center text-2xl md:text-3xl transition-all duration-700">🔍</div>
+                            <div id="bubble-info" class="absolute -top-12 right-0 bg-gray-800 border-2 border-purple-500 text-white text-[8px] md:text-[9px] font-bold px-2 py-1.5 rounded-lg opacity-0 transition-all whitespace-nowrap shadow-2xl text-right">Bereit...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="data-orb" class="absolute w-4 h-4 md:w-5 md:h-5 bg-accent rounded-full shadow-[0_0_35px_#58FFE9] opacity-0 z-50 pointer-events-none transition-all duration-[1200ms] ease-in-out" style="top:0; left:0; will-change: transform;"></div>
+
+                <button id="start-simulation" class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white text-black font-bold px-10 py-4 rounded-full hover:bg-accent transition-all text-[10px] z-40 uppercase tracking-[0.2em] shadow-xl whitespace-nowrap">
+                    Simulation starten
+                </button>
+            </div>
+
+            <div class="space-y-10 order-1 lg:order-2" data-aos="fade-left">
+                <div>
+                    <h2 class="text-xl md:text-3xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+                        Der <span class="text-accent">ThinkUp Agent</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Unser Multi-Agent-System verteilt komplexe Anfragen auf spezialisierte KI-Experten für präzise Antworten.
+                    </p>
+                </div>
+                <div class="space-y-8">
+                    <div class="relative pl-10 border-l-2 border-green-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-[10px] font-black text-black shadow-[0_0_15px_rgba(34,197,94,0.5)]">1</div>
+                        <h4 class="text-white font-bold text-lg md:text-xl mb-1">Inbound Request</h4>
+                        <p class="text-gray-400 text-xs md:text-sm">Nachrichtenerfassung in Echtzeit.</p>
+                    </div>
+                    <div class="relative pl-10 border-l-2 border-accent/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-accent flex items-center justify-center text-[10px] font-black text-black shadow-[0_0_15px_#58FFE9]">2</div>
+                        <h4 class="text-white font-bold text-lg md:text-xl mb-1">Leader-Orchestrierung</h4>
+                        <p class="text-gray-400 text-xs md:text-sm">Analyse & Delegation der Aufgaben.</p>
+                    </div>
+                    <div class="relative pl-10 border-l-2 border-blue-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-[10px] font-black text-black shadow-[0_0_15px_rgba(59,130,246,0.5)]">3</div>
+                        <h4 class="text-white font-bold text-lg md:text-xl mb-1">Deep Action Layer</h4>
+                        <p class="text-gray-400 text-xs md:text-sm">Check von Kalender & Firmendaten.</p>
+                    </div>
+                    <div class="relative pl-10 border-l-2 border-orange-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-[10px] font-black text-black shadow-[0_0_15px_rgba(249,115,22,0.5)]">4</div>
+                        <h4 class="text-white font-bold text-lg md:text-xl mb-1">Communicator Output</h4>
+                        <p class="text-gray-400 text-xs md:text-sm">Automatisierter Antwortversand.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Container>
+  </section>
+</Layout>
+
+<script is:inline>
+  const orb = document.getElementById('data-orb');
+  const container = document.getElementById('mas-visualizer');
+  const btn = document.getElementById('start-simulation');
+
+  const getCenter = (id) => {
+    const el = document.getElementById(id);
+    const cRect = container.getBoundingClientRect();
+    const eRect = el.getBoundingClientRect();
+    return {
+      x: (eRect.left - cRect.left) + (eRect.width / 2),
+      y: (eRect.top - cRect.top) + (eRect.height / 2)
+    };
+  };
+
+  const drawLines = () => {
+    const wa = getCenter('icon-whatsapp');
+    const leader = getCenter('icon-leader');
+    const comm = getCenter('icon-comm');
+    const termin = getCenter('icon-termin');
+    const info = getCenter('icon-info');
+
+    const updateLine = (id, p1, p2) => {
+        const line = document.getElementById(id);
+        line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
+        line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
+    };
+
+    updateLine('line-1', wa, leader);
+    updateLine('line-comm', leader, comm);
+    updateLine('line-termin', leader, termin);
+    updateLine('line-info', leader, info);
+    
+    const path = document.getElementById('path-return');
+    path.setAttribute('d', `M ${comm.x} ${comm.y} Q ${wa.x - 120} ${leader.y} ${wa.x} ${wa.y}`);
+  };
+
+  const moveOrb = (targetId, opacity = 1) => {
+    const center = getCenter(targetId);
+    orb.style.opacity = opacity;
+    orb.style.transform = `translate3d(${center.x - orb.offsetWidth/2}px, ${center.y - orb.offsetHeight/2}px, 0)`;
+  };
+
+  const setBubble = (id, show, text = null) => {
+    const el = document.getElementById(id);
+    if(text) el.innerText = text;
+    el.style.opacity = show ? "1" : "0";
+  };
+
+  const activeUI = (id, color, active) => {
+    const el = document.getElementById(id);
+    el.style.borderColor = active ? color : "";
+    el.style.boxShadow = active ? `0 0 35px ${color}44` : "";
+    el.style.transform = active ? "scale(1.1)" : "scale(1)";
+  };
+
+  btn.addEventListener('click', async () => {
+    if(btn.disabled) return;
+    btn.disabled = true;
+    btn.style.opacity = "0.5";
+    document.getElementById('path-return').style.opacity = "0";
+    drawLines();
+
+    // 1. WHATSAPP
+    moveOrb('icon-whatsapp', 1);
+    activeUI('icon-whatsapp', '#22c55e', true);
+    setBubble('bubble-whatsapp', true, "Anfrage: Termin morgen?");
+    await new Promise(r => setTimeout(r, 2000));
+    setBubble('bubble-whatsapp', false);
+
+    // 2. LEADER (Thinking)
+    moveOrb('icon-leader');
+    activeUI('icon-leader', '#58FFE9', true);
+    setBubble('bubble-leader', true, "Prüfe Anfrage...");
+    await new Promise(r => setTimeout(r, 1500));
+    setBubble('bubble-leader', true, "Passende Zeiten finden...");
+    await new Promise(r => setTimeout(r, 1200));
+    setBubble('bubble-leader', false);
+
+    // 3. TERMIN (Thinking)
+    moveOrb('icon-termin');
+    activeUI('icon-termin', '#3b82f6', true);
+    setBubble('bubble-termin', true, "Kalender prüfen...");
+    await new Promise(r => setTimeout(r, 1800));
+    setBubble('bubble-termin', true, "Slot gefunden: 10:00 Uhr!");
+    await new Promise(r => setTimeout(r, 1200));
+    setBubble('bubble-termin', false);
+    activeUI('icon-termin', '', false);
+
+    // Zurück zum Leader
+    moveOrb('icon-leader');
+    setBubble('bubble-leader', true, "Details prüfen...");
+    await new Promise(r => setTimeout(r, 1000));
+    setBubble('bubble-leader', false);
+
+    // 4. INFO (Thinking)
+    moveOrb('icon-info');
+    activeUI('icon-info', '#a855f7', true);
+    setBubble('bubble-info', true, "Infos laden...");
+    await new Promise(r => setTimeout(r, 1800));
+    setBubble('bubble-info', true, "Antwort bereit.");
+    await new Promise(r => setTimeout(r, 1200));
+    setBubble('bubble-info', false);
+    activeUI('icon-info', '', false);
+
+    // Final Leader Step
+    moveOrb('icon-leader');
+    setBubble('bubble-leader', true, "Antwort senden...");
+    await new Promise(r => setTimeout(r, 1200));
+    setBubble('bubble-leader', false);
+
+    // 5. COMMUNICATOR (Thinking)
+    moveOrb('icon-comm');
+    activeUI('icon-comm', '#f97316', true);
+    setBubble('bubble-comm', true, "Empfange Details...");
+    await new Promise(r => setTimeout(r, 1200));
+    setBubble('bubble-comm', true, "Passe Text an...");
+    await new Promise(r => setTimeout(r, 1800));
+    setBubble('bubble-comm', true, "Anfrage beantwortet!");
+    await new Promise(r => setTimeout(r, 1000));
+    setBubble('bubble-comm', false);
+
+    // Return to WA
+    document.getElementById('path-return').style.opacity = "1";
+    moveOrb('icon-whatsapp');
+    await new Promise(r => setTimeout(r, 1200));
+    activeUI('icon-whatsapp', '#22c55e', true);
+    setBubble('bubble-whatsapp', true, "Termin bestätigt ✅");
+    
+    await new Promise(r => setTimeout(r, 2500));
+    
+    orb.style.opacity = 0;
+    setBubble('bubble-whatsapp', false);
+    ["icon-whatsapp", "icon-leader", "icon-comm"].forEach(id => activeUI(id, '', false));
+    btn.disabled = false;
+    btn.style.opacity = "1";
+  });
+
+  window.addEventListener('resize', drawLines);
+</script>
+
+<style>
+  #mas-visualizer {
+    background: radial-gradient(circle at 50% 50%, rgba(88,255,233,0.05) 0%, transparent 80%);
+  }
+</style>

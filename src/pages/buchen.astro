@@ -1,0 +1,133 @@
+---
+// src/pages/buchen.astro
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+---
+
+<Layout
+  title="Angebot für Ihren KI-Agenten | ThinkUp"
+  description="Buchen Sie Ihr Angebot oder ihren  Termin zur Einführung Ihrer KI-Agenten: Termine automatisch buchen, Anfragen automatisch beantworten."
+>
+  
+  <Container class="mt-32 mb-20 max-w-4xl text-white px-6"> 
+    
+    <header class="text-center mb-10">
+      <h1 class="mb-4 text-xl font-extrabold leading-tight text-accent sm:text-3xl md:text-4xl lg:text-5xl">
+        Termin für KI-Agenten sichern
+      </h1>
+      
+      <p class="text-lg text-gray-300 mx-auto max-w-3xl">
+        Sie buchen einen Termin. Wir zeigen Ihnen die wichtigsten Schritte für die Umsetzung.
+        Danach wissen Sie, wie Ihr Agent Termine automatisch buchen und Anfragen automatisch beantworten wird.
+        Ergebnis: weniger Unterbrechungen im Alltag. mehr Buchungen, weniger manueller Aufwand.
+      </p>
+    </header>
+
+    <div class="tally-form-container min-h-[928px]">
+      <div
+        id="tally-consent-root"
+        data-tally-src="https://tally.so/embed/vGOJVA?alignLeft=1&hideTitle=1&dynamicHeight=1"
+        class="flex min-h-[928px] items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-8 text-center"
+      >
+        <div class="max-w-2xl">
+          <h2 class="text-2xl font-bold text-accent">Externes Buchungsformular</h2>
+          <p class="mt-4 text-gray-300 leading-7">
+            Das Formular wird erst geladen, wenn Sie externen Medien zustimmen.
+            Vorher wird keine Verbindung zu Tally aufgebaut.
+          </p>
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <button
+              id="tally-open-settings"
+              type="button"
+              class="rounded-xl bg-white px-5 py-3 font-semibold text-black transition hover:ring-2 hover:ring-accent"
+            >
+              Cookie-Einstellungen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</Layout>
+
+<script is:inline>
+  (function () {
+    const root = document.getElementById('tally-consent-root');
+    const openSettingsButton = document.getElementById('tally-open-settings');
+    if (!root) return;
+    const scriptSrc = 'https://tally.so/widgets/embed.js';
+
+    const hasExternalMediaConsent = () => {
+      try {
+        const rawCookie = document.cookie
+          .split('; ')
+          .find((cookie) => cookie.startsWith('cookieConsent='));
+
+        if (!rawCookie) return false;
+
+        const parsed = JSON.parse(decodeURIComponent(rawCookie.split('=')[1]));
+        const isExpired =
+          parsed?.expiresAt && new Date(parsed.expiresAt) < new Date();
+
+        if (isExpired) return false;
+
+        return Array.isArray(parsed?.categories) && parsed.categories.includes('youtube');
+      } catch {
+        return false;
+      }
+    };
+
+    const loadTally = () => {
+      if (!hasExternalMediaConsent()) return;
+      const src = root.getAttribute('data-tally-src');
+      if (!src || root.querySelector('iframe')) return;
+
+      root.innerHTML = '';
+
+      const iframe = document.createElement('iframe');
+      iframe.dataset.tallySrc = src;
+      iframe.width = '100%';
+      iframe.height = '928';
+      iframe.className = 'w-full rounded-2xl border border-white/10 bg-transparent';
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('marginheight', '0');
+      iframe.setAttribute('marginwidth', '0');
+      iframe.setAttribute('title', 'Produktanfrage');
+      root.appendChild(iframe);
+
+      const initializeTally = () => {
+        if (typeof window.Tally !== 'undefined') {
+          window.Tally.loadEmbeds();
+          return;
+        }
+
+        root
+          .querySelectorAll('iframe[data-tally-src]:not([src])')
+          .forEach((element) => {
+            element.src = element.dataset.tallySrc;
+          });
+      };
+
+      if (typeof window.Tally !== 'undefined') {
+        initializeTally();
+      } else if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
+        const script = document.createElement('script');
+        script.src = scriptSrc;
+        script.onload = initializeTally;
+        script.onerror = initializeTally;
+        document.body.appendChild(script);
+      } else {
+        initializeTally();
+      }
+    };
+
+    openSettingsButton?.addEventListener('click', () => {
+      if (typeof window.showCookieSettings === 'function') {
+        window.showCookieSettings();
+      }
+    });
+
+    loadTally();
+  })();
+</script>

@@ -1,0 +1,29 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+
+    // ⚙️ Typen
+    "types": ["astro/client", "node"],
+
+    // ✅ wichtige Flags
+    "skipLibCheck": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    // ✅ Pfadalias
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

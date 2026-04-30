@@ -1,0 +1,33 @@
+---
+import 'aos/dist/aos.css'; // AOS-Styles ins Bundle holen
+---
+<style is:global>
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+</style>
+<script>
+  const initAos = async () => {
+    const AOS = (await import('aos')).default;
+    AOS.init({
+      once: false,
+      duration: 800,
+      offset: 120,
+      easing: 'ease-out-cubic',
+      startEvent: 'DOMContentLoaded',
+    });
+
+    requestAnimationFrame(() => {
+      AOS.refreshHard();
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      void initAos();
+    }, { once: true });
+  } else {
+    void initAos();
+  }
+</script>

@@ -1,0 +1,79 @@
+---
+import EmailReveal from './EmailReveal.astro';
+---
+
+<footer class="mt-20 border-y border-[#ccc] bg-black py-10 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Navigation -->
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-white">Navigation</h3>
+        <ul class="space-y-2 text-sm text-white/75">
+          <li><a href="/" class="hover:text-accent">Startseite</a></li>
+          <li><a href="/automatisierung" class="hover:text-accent">Automatisierung</a></li>
+          <li><a href="/kontakt" class="hover:text-accent">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechtliches -->
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-white">Rechtliches</h3>
+        <ul class="space-y-2 text-sm text-white/75">
+          <li><a href="/impressum" class="hover:text-accent">Impressum</a></li>
+          <li><a href="/datenschutz" class="hover:text-accent">Datenschutz</a></li>
+          <li><a href="/agb" class="hover:text-accent">AGB</a></li>
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-white">Folge uns</h3>
+        <ul class="space-y-2 text-sm text-white/75">
+          <li>
+            <a href="https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A109810450&keywords=ThinkUp-AI&origin=ENTITY_SEARCH_HOME_HISTORY&sid=_Xp"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="hover:text-accent flex items-center gap-2">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/thinkup_ai/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="hover:text-accent flex items-center gap-2">
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@ThinkUp-AI"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="hover:text-accent flex items-center gap-2">
+              YouTube
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Kontakt -->
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-white">Kontakt</h3>
+        <p class="text-sm text-white/75">
+          E-Mail: <EmailReveal className="hover:text-accent" label="E-Mail anzeigen" />
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="mt-10 border-t border-white/10 pt-6 text-center">
+      <p class="text-sm text-white/60">
+        © {new Date().getFullYear()} ThinkUp-AI – Ein Service der Himmelsbach, Koch, Müller & Schick GbR. Alle Rechte vorbehalten. Diese Webseite wurde mit Hilfe von KI erstellt.
+      </p>
+    </div>
+
+  </div>
+</footer>

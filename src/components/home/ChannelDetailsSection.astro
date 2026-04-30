@@ -1,0 +1,261 @@
+---
+import Container from "../Container.astro";
+
+type Channel = "whatsapp" | "instagram" | "telefon" | "website";
+
+type ChannelContent = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  steps: { title: string; text: string }[];
+  benefits: { title: string; text: string }[];
+};
+
+const contentByChannel: Record<Channel, ChannelContent> = {
+  whatsapp: {
+    eyebrow: "So funktioniert Ihr WhatsApp Agent",
+    title: "Automatisiert Terminanfragen, Antworten und Nachfassen in einem klaren Ablauf.",
+    intro:
+      "Der Agent übernimmt wiederkehrende WhatsApp-Anfragen direkt im vertrauten Kanal Ihrer Kunden. Er fragt die relevanten Infos ab, prüft Verfügbarkeiten und bestätigt Termine, ohne dass Ihr Team jede Nachricht selbst beantworten muss.",
+    steps: [
+      {
+        title: "1. Anfrage wird sofort aufgenommen",
+        text:
+          "Der Agent antwortet direkt auf eingehende Nachrichten, erfasst Anliegen wie Terminwunsch, Uhrzeit, Leistung oder Rückfragen zu Preisen und Öffnungszeiten.",
+      },
+      {
+        title: "2. Verfügbarkeit wird geprüft",
+        text:
+          "Freie Zeiten und Regeln werden mit Ihrem Kalender oder Buchungsablauf abgeglichen, damit nur passende Vorschläge gemacht und Sonderfälle sauber erkannt werden.",
+      },
+      {
+        title: "3. Termin wird bestätigt und vorbereitet",
+        text:
+          "Nach der Auswahl wird der Termin bestätigt. Auf Wunsch folgen Erinnerungen, Umbuchungen oder weitere Hinweise automatisch im Chat.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Weniger Unterbrechungen im Alltag",
+        text:
+          "Ihr Team bleibt stärker bei Kunden und Leistung, statt parallel dauernd WhatsApp-Nachrichten zu beantworten.",
+      },
+      {
+        title: "Mehr Buchungen ohne zusätzliches Personal",
+        text:
+          "Anfragen gehen nicht mehr verloren, weil Interessenten schneller eine Antwort und direkt einen nächsten Schritt bekommen.",
+      },
+      {
+        title: "Weniger No-Shows und weniger Chaos",
+        text:
+          "Automatische Bestätigungen und Erinnerungen helfen dabei, Ausfälle zu reduzieren und den Tagesablauf planbarer zu machen.",
+      },
+      {
+        title: "Keine neue App für Ihre Kunden",
+        text:
+          "Gebucht wird dort, wo Kunden ohnehin schon schreiben. Das senkt die Hürde und fühlt sich natürlich an.",
+      },
+    ],
+  },
+
+  instagram: {
+    eyebrow: "So funktioniert Ihr Instagram Agent",
+    title: "Beantwortet DMs schnell, sortiert Anfragen vor und führt Interessenten zur Buchung.",
+    intro:
+      "Der Instagram Agent reagiert auf Direktnachrichten, übernimmt erste Qualifizierung und bringt Struktur in eingehende Leads. Statt losem Hin und Her entsteht ein klarer Weg von der Anfrage bis zur Beratung oder Terminbuchung.",
+    steps: [
+      {
+        title: "1. DMs werden sofort beantwortet",
+        text:
+          "Neue Anfragen erhalten direkt eine erste Rückmeldung, auch wenn Ihr Team gerade im Termin, im Gespräch oder außerhalb der Öffnungszeiten ist.",
+      },
+      {
+        title: "2. Interessenten werden vorqualifiziert",
+        text:
+          "Der Agent klärt Bedarf, Leistung, Timing und wichtige Eckdaten, damit aus Social-Nachrichten echte qualifizierte Anfragen werden.",
+      },
+      {
+        title: "3. Der nächste Schritt wird direkt eingeleitet",
+        text:
+          "Je nach Fall führt der Agent zur Buchung, zur Rückmeldung Ihres Teams oder zu den passenden Informationen weiter.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Aus DMs werden echte Leads",
+        text:
+          "Instagram bleibt nicht nur ein Reichweitenkanal, sondern wird zu einem verlässlichen Eingang für ernsthafte Anfragen.",
+      },
+      {
+        title: "Schnellere Reaktionszeit",
+        text:
+          "Interessenten bekommen direkt Orientierung. Das reduziert Absprünge und verbessert den ersten Eindruck Ihres Unternehmens.",
+      },
+      {
+        title: "Mehr Struktur im Vertriebsalltag",
+        text:
+          "Ihr Team übernimmt nicht jede kleine Rückfrage selbst, sondern steigt dort ein, wo persönliche Beratung wirklich sinnvoll ist.",
+      },
+      {
+        title: "Professionellerer digitaler Auftritt",
+        text:
+          "Klare Antworten, saubere Prozesse und schnelle Rückmeldungen sorgen für mehr Vertrauen bei neuen Kontakten.",
+      },
+    ],
+  },
+
+  telefon: {
+    eyebrow: "So funktioniert Ihr Telefon Agent",
+    title: "Nimmt Anrufe an, führt durch das Gespräch und bereitet Termine direkt vor.",
+    intro:
+      "Der Telefon Agent beantwortet eingehende Anrufe, führt natürliche Rückfragen und prüft freie Zeiten, während Ihr Team weiterarbeiten kann. So bleibt Ihr Betrieb erreichbar, ohne dass jede Unterbrechung manuell aufgefangen werden muss.",
+    steps: [
+      {
+        title: "1. Eingehende Anrufe werden angenommen",
+        text:
+          "Auch während der Behandlung, in Stoßzeiten oder außerhalb der direkten Erreichbarkeit geht der Anruf nicht einfach verloren.",
+      },
+      {
+        title: "2. Der Agent klärt das Anliegen",
+        text:
+          "Terminwünsche, Standardfragen und erste Details werden im Gespräch aufgenommen, damit Anliegen schnell eingeordnet werden können.",
+      },
+      {
+        title: "3. Buchung oder Weiterleitung erfolgt passend",
+        text:
+          "Je nach Fall wird ein Termin vorbereitet, bestätigt oder das Anliegen sauber an Ihr Team weitergegeben.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Weniger verpasste Anrufe",
+        text:
+          "Mehr Erreichbarkeit bedeutet weniger verlorene Chancen und mehr eingetragene Termine im Tagesgeschäft.",
+      },
+      {
+        title: "Mehr Fokus für Ihr Team",
+        text:
+          "Behandlungen, Beratung und operative Arbeit werden seltener durch eingehende Telefonate unterbrochen.",
+      },
+      {
+        title: "24/7-Grundabdeckung",
+        text:
+          "Auch außerhalb klassischer Öffnungszeiten können Anliegen aufgenommen und vorbereitet werden.",
+      },
+      {
+        title: "Sauberer Prozess statt Zettelwirtschaft",
+        text:
+          "Weniger Rückruflisten, weniger manuelle Notizen und ein klarerer Ablauf bei Buchungen und Rückfragen.",
+      },
+    ],
+  },
+
+  website: {
+    eyebrow: "So funktioniert Ihr Website Agent",
+    title: "Integriert ein modernes Chatfenster direkt auf Ihrer Website.",
+    intro:
+      "Der Website Agent empfängt Besucher direkt auf Ihrer Seite, beantwortet Fragen, führt durch relevante Informationen und kann Anfragen oder Terminwünsche strukturiert vorbereiten. So wird Ihre Website vom reinen Informationskanal zu einem aktiven Einstiegspunkt für neue Kunden.",
+    steps: [
+      {
+        title: "1. Besucher starten den Chat auf Ihrer Website",
+        text:
+          "Der Agent erscheint als modernes Chatfenster auf Ihrer Website. Besucher können Fragen stellen, Leistungen verstehen und direkt den nächsten Schritt einleiten.",
+      },
+      {
+        title: "2. Fragen werden sofort beantwortet",
+        text:
+          "Wiederkehrende Fragen zu Leistungen, Preisen, Abläufen, Öffnungszeiten oder Voraussetzungen werden automatisch beantwortet.",
+      },
+      {
+        title: "3. Anfrage oder Terminwunsch wird vorbereitet",
+        text:
+          "Der Agent sammelt wichtige Informationen und führt den Besucher je nach Use Case zur Anfrage, Buchung oder Weiterleitung an Ihr Team.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Mehr Anfragen aus Website-Besuchern",
+        text:
+          "Interessenten erhalten direkt Orientierung, statt die Seite zu verlassen oder später vielleicht nicht mehr zurückzukommen.",
+      },
+      {
+        title: "Professioneller erster Eindruck",
+        text:
+          "Ein hochwertiges Chatfenster macht Ihre Website interaktiver, moderner und kundenfreundlicher.",
+      },
+      {
+        title: "Weniger manuelle Standardfragen",
+        text:
+          "Ihr Team muss wiederkehrende Fragen nicht jedes Mal selbst beantworten und wird im Alltag entlastet.",
+      },
+      {
+        title: "Individuell auf Ihre Website angepasst",
+        text:
+          "Inhalte, Tonalität, Leistungen und Abläufe werden passend zu Ihrem Unternehmen und Ihrem Use Case eingerichtet.",
+      },
+    ],
+  },
+};
+
+const { channel } = Astro.props as { channel: Channel };
+const content = contentByChannel[channel];
+---
+
+<section class="bg-white px-6 py-24 text-neutral-950">
+  <Container>
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center rounded-full border border-black/10 bg-[#ccc] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-neutral-700 shadow-[0_14px_40px_rgba(15,23,42,0.08)]">
+          {content.eyebrow}
+        </span>
+
+        <h2 class="mt-6 text-xl font-extrabold leading-tight text-neutral-950 md:text-3xl">
+          {content.title}
+        </h2>
+
+        <p class="mt-6 max-w-3xl text-base leading-8 text-neutral-600 md:text-lg">
+          {content.intro}
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="rounded-[2rem] border border-black/10 bg-[#ccc] p-8 text-neutral-950 shadow-[0_28px_80px_rgba(15,23,42,0.08)] md:p-10">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600">
+            Wie es funktioniert
+          </p>
+
+          <div class="mt-8 space-y-8">
+            {content.steps.map((step) => (
+              <div class="rounded-[1.5rem] border border-black/10 bg-[rgba(255,255,255,0.28)] p-6">
+                <h3 class="text-xl font-bold text-neutral-950">{step.title}</h3>
+                <p class="mt-3 text-sm leading-7 text-neutral-700 md:text-base">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="grid gap-4">
+          {content.benefits.map((benefit) => (
+            <article class="rounded-[1.75rem] border border-black/10 bg-[#ccc] p-6 text-neutral-950 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+              <h3 class="text-lg font-bold text-neutral-950">{benefit.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-neutral-700 md:text-base">
+                {benefit.text}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <a
+          href="/buchen"
+          class="inline-flex items-center justify-center rounded-full bg-neutral-950 px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-accent hover:text-black"
+        >
+          Produkt anfragen
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

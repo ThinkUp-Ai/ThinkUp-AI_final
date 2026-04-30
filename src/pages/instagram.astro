@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+import PremiumChatDemo from '../components/home/PremiumChatDemo';
+import ChannelDetailsSection from '../components/home/ChannelDetailsSection.astro';
+---
+
+<Layout
+  title="Instagram Agent | ThinkUp"
+  description="Anfragen automatisieren – getestet mit Ihrer eigenen Testnummer, ohne Umleitung."
+>
+  <section class="pt-36 pb-24 px-6 bg-black text-white">
+    <Container class="max-w-5xl text-center">
+      <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-[#58FFE9]">
+        Instagram
+      </h1>
+      <p class="text-white/70 text-base md:text-lg mt-6 max-w-3xl mx-auto">
+        Ihre Kunden und Interessenten schreiben direkt über Instagram, was die
+        Kontaktaufnahme besonders einfach macht. Ihr Team muss nicht mehr jede
+        DM selbst beantworten und gewinnt mehr Zeit für Beratung und Buchungen.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <a
+          href="/buchen"
+          class="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:brightness-110"
+        >
+          Produkt anfragen
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <PremiumChatDemo
+    client:load
+    channel="instagram"
+    badge="Instagram Demo"
+    title="Instagram Agent testen"
+    description="Die gleiche hochwertige Demo-Architektur wie auf der Startseite, aber für Instagram-DMs und Social-Leads vorbereitet."
+  />
+  <ChannelDetailsSection channel="instagram" />
+</Layout>
