@@ -779,14 +779,24 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
   function loadFacebookSdk(metaAppId: string) {
     if (facebookSdkPromise) return facebookSdkPromise;
 
-    facebookSdkPromise = new Promise<FacebookSdk>((resolve) => {
+    facebookSdkPromise = new Promise<FacebookSdk>((resolve, reject) => {
       if (metaWindow.FB) {
         resolve(metaWindow.FB);
         return;
       }
 
+      const timeoutId = window.setTimeout(() => {
+        facebookSdkPromise = null;
+        reject(new Error("Das Meta SDK konnte nicht geladen werden."));
+      }, 10000);
+
       metaWindow.fbAsyncInit = function () {
-        if (!metaWindow.FB) return;
+        if (!metaWindow.FB) {
+          window.clearTimeout(timeoutId);
+          facebookSdkPromise = null;
+          reject(new Error("Das Meta SDK wurde geladen, aber nicht initialisiert."));
+          return;
+        }
 
         metaWindow.FB.init({
           appId: metaAppId,
@@ -795,6 +805,7 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
           version: "v19.0",
         });
 
+        window.clearTimeout(timeoutId);
         resolve(metaWindow.FB);
       };
 
@@ -806,6 +817,11 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
       script.src = "https://connect.facebook.net/de_DE/sdk.js";
       script.async = true;
       script.defer = true;
+      script.onerror = function () {
+        window.clearTimeout(timeoutId);
+        facebookSdkPromise = null;
+        reject(new Error("Das Meta SDK wurde vom Browser oder Netzwerk blockiert."));
+      };
       document.body.appendChild(script);
     });
 
@@ -825,7 +841,15 @@ Ali Demir – Barber – keine direkte Kontaktmöglichkeit"
       return;
     }
 
-    const FB = await loadFacebookSdk(appId);
+    let FB: FacebookSdk;
+
+    try {
+      FB = await loadFacebookSdk(appId);
+    } catch (error) {
+      console.error("Meta SDK Fehler:", error);
+      setMetaStatus("Meta SDK konnte nicht geladen werden. Bitte Browser-Blocker, Domain-Einstellungen und Meta App-Konfiguration prüfen.");
+      return;
+    }
 
     FB.login(
       function (response) {
