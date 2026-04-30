@@ -160,6 +160,26 @@
     color: #58FFE9;
   }
 
+  .dropdown-parent {
+    font-weight: 700;
+  }
+
+  .dropdown-child {
+    margin-left: 0.75rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .dropdown-child::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 50%;
+    width: 0.45rem;
+    height: 1px;
+    background: rgba(11, 11, 11, 0.45);
+  }
+
   /* 🔥 CLEAN PREMIUM BUTTON */
   .customer-login {
     @apply rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition;
@@ -189,6 +209,55 @@
 
     transform: translateY(-1px) scale(1.04);
   }
+
+  @media (max-width: 767px) {
+    .glass-header {
+      left: 50%;
+      width: calc(100% - 2rem);
+      min-height: 72px;
+      padding: 0.75rem 1rem;
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+    }
+
+    .logo-text {
+      display: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+    }
+
+    .nav-links {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin-right: 0;
+      justify-content: flex-end;
+      gap: clamp(0.75rem, 3vw, 1.25rem);
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .nav-links a,
+    .nav-links .dropdown-container {
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .customer-login {
+      display: inline-flex;
+      width: 54px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 1.15rem;
+      letter-spacing: 0;
+    }
+  }
 </style>
 
 <header id="dynamic-header" class="glass-header">
@@ -206,11 +275,11 @@
       </a>
 
       <div id="leistungen-dropdown" class="leistungen-dropdown hidden">
-        <a href="/automatisierung" class="dropdown-link">Automatisierung</a>
-        <a href="/instagram" class="dropdown-link">Instagram</a>
-        <a href="/whatsapp" class="dropdown-link">WhatsApp</a>
-        <a href="/telefon" class="dropdown-link">Telefon</a>
-        <a href="/website" class="dropdown-link">Website</a>
+        <a href="/automatisierung" class="dropdown-link dropdown-parent">Automatisierungen</a>
+        <a href="/instagram" class="dropdown-link dropdown-child">Instagram</a>
+        <a href="/whatsapp" class="dropdown-link dropdown-child">WhatsApp</a>
+        <a href="/telefon" class="dropdown-link dropdown-child">Telefon</a>
+        <a href="/website" class="dropdown-link dropdown-child">Website</a>
       </div>
     </div>
 
