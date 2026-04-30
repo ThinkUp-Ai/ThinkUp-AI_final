@@ -14,7 +14,7 @@ const hasError = Astro.url.searchParams.get("error") === "1";
     <div class="absolute right-[-10rem] bottom-20 h-[420px] w-[420px] rounded-full bg-[#58FFE9]/10 blur-[120px]"></div>
 
     <Container class="relative z-10 max-w-5xl">
-      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div class="mx-auto grid max-w-xl gap-10 text-center lg:max-w-none lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:text-left">
         
         <div>
           <span class="inline-flex rounded-full border border-[#58FFE9]/35 bg-[#58FFE9]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#58FFE9]">
@@ -26,17 +26,17 @@ const hasError = Astro.url.searchParams.get("error") === "1";
             <span class="text-[#58FFE9]"> KI-Agenten.</span>
           </h1>
 
-          <p class="mt-6 max-w-xl text-base leading-7 text-white/70 md:text-lg">
+          <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-white/70 md:text-lg lg:mx-0">
             Melden Sie sich an, um Ihren Onboarding-Prozess, Ihre Agenten-Einrichtung
             und später Ihr Dashboard zu verwalten.
           </p>
         </div>
 
-        <div class="rounded-[2rem] border border-[#58FFE9]/25 bg-white/5 p-6 shadow-[0_0_60px_rgba(88,255,233,0.14)]">
+        <div class="mx-auto w-full max-w-lg rounded-[2rem] border border-[#58FFE9]/25 bg-white/5 p-4 shadow-[0_0_60px_rgba(88,255,233,0.14)] sm:p-6">
           <form 
             method="POST"
             action="/api/login"
-            class="rounded-[1.5rem] border border-white/10 bg-black p-6"
+            class="rounded-[1.5rem] border border-white/10 bg-black p-5 text-left sm:p-6"
           >
             {hasError && (
               <div class="mb-5 rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-100">
