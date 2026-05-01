@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { getSessionId } from "../../lib/chat/sessionId";
+import { getSessionId, saveSessionId } from "../../lib/chat/sessionId";
 
 type ChatMessage = {
   id: string;
@@ -207,6 +207,17 @@ export default function PremiumChatDemo({
             ? data.error
             : "Die Nachricht konnte gerade nicht verarbeitet werden."
         );
+      }
+
+      const responseSessionId =
+        typeof data?.sessionId === "string" && data.sessionId.trim()
+          ? data.sessionId.trim()
+          : typeof data?.session_id === "string" && data.session_id.trim()
+          ? data.session_id.trim()
+          : "";
+
+      if (responseSessionId) {
+        saveSessionId(responseSessionId);
       }
 
       const replyText =

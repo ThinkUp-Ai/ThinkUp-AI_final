@@ -6,6 +6,8 @@ export type ChatRequest = {
 
 export type ChatServiceResult = {
   reply: string;
+  sessionId?: string;
+  session_id?: string;
   provider: "n8n";
   integrationReady: boolean;
 };
@@ -114,6 +116,49 @@ function readReplyText(payload: unknown): string {
   return "";
 }
 
+function readSessionId(payload: unknown): string {
+  if (Array.isArray(payload)) {
+    for (const item of payload) {
+      const nestedSessionId = readSessionId(item);
+      if (nestedSessionId) {
+        return nestedSessionId;
+      }
+    }
+    return "";
+  }
+
+  if (!payload || typeof payload !== "object") {
+    return "";
+  }
+
+  const record = payload as Record<string, unknown>;
+  const directFields = [record.sessionId, record.session_id];
+
+  for (const field of directFields) {
+    if (typeof field === "string" && field.trim()) {
+      return field.trim();
+    }
+  }
+
+  const nestedFields = [
+    record.data,
+    record.body,
+    record.result,
+    record.payload,
+    record.output,
+    record.response,
+  ];
+
+  for (const field of nestedFields) {
+    const nestedSessionId = readSessionId(field);
+    if (nestedSessionId) {
+      return nestedSessionId;
+    }
+  }
+
+  return "";
+}
+
 async function forwardToN8n(
   message: string,
   channel: "whatsapp" | "instagram",
@@ -145,6 +190,7 @@ async function forwardToN8n(
       channel,
       message,
       sessionId,
+      session_id: sessionId,
       submittedAt: new Date().toISOString(),
     }),
   });
@@ -169,17 +215,23 @@ async function forwardToN8n(
     );
   }
 
-  return reply;
+  return {
+    reply,
+    sessionId: readSessionId(data),
+  };
 }
 
 export async function createChatReply(
   request: ChatRequest
 ): Promise<ChatServiceResult> {
   const channel = request.channel === "instagram" ? "instagram" : "whatsapp";
-  const reply = await forwardToN8n(request.message, channel, request.sessionId);
+  const result = await forwardToN8n(request.message, channel, request.sessionId);
 
   return {
-    reply,
+    reply: result.reply,
+    ...(result.sessionId
+      ? { sessionId: result.sessionId, session_id: result.sessionId }
+      : {}),
     provider: "n8n",
     integrationReady: true,
   };
