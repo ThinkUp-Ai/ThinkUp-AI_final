@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 
-const WEBHOOK_URL = import.meta.env.N8N_WEBHOOK_URL_w2n_Gescihter_der_Stadt;
+const WEBHOOK_URL =
+  import.meta.env.N8N_WEBHOOK_URL_w2n_Gesichter_der_Stadt ??
+  import.meta.env.N8N_WEBHOOK_URL_w2n_Gescihter_der_Stadt;
 
 const ALLOWED_ORIGINS = [
   "https://wave2network.com",

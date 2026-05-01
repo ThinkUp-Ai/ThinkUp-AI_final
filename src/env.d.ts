@@ -21,6 +21,8 @@ declare global {
     readonly META_WA_APP_SECRET?: string;
     readonly N8N_WHATSAPP_WEBHOOK_URL?: string;
     readonly N8N_INSTAGRAM_WEBHOOK_URL?: string;
+    readonly N8N_WEBHOOK_URL_w2n_Gesichter_der_Stadt?: string;
+    readonly N8N_WEBHOOK_URL_w2n_Gescihter_der_Stadt?: string;
     readonly N8N_WEBHOOK_SECRET?: string;
     readonly TWILIO_ACCOUNT_SID?: string;
     readonly TWILIO_AUTH_TOKEN?: string;
