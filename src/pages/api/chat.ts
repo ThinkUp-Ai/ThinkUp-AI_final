@@ -14,7 +14,7 @@ function getClientIdentifier(request: Request, clientAddress: string | undefined
   return firstForwardedIp || clientAddress || "anonymous";
 }
 
-function sanitizeSessionId(input: unknown) {
+function sanitizeUid(input: unknown) {
   if (typeof input !== "string") {
     return "";
   }
@@ -62,7 +62,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
     const payload = await request.json().catch(() => null);
     const messageValidation = sanitizeMessage(payload?.message);
-    const sessionId = sanitizeSessionId(payload?.sessionId);
+    const uid = sanitizeUid(payload?.uid);
 
     if (!messageValidation.ok) {
       return new Response(
@@ -74,9 +74,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
-    if (!sessionId) {
+    if (!uid) {
       return new Response(
-        JSON.stringify({ error: "Session-ID fehlt oder ist ungültig." }),
+        JSON.stringify({ error: "UID fehlt oder ist ungültig." }),
         {
           status: 400,
           headers: JSON_HEADERS,
@@ -91,7 +91,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     const result = await createChatReply({
       message: messageValidation.value,
       channel,
-      sessionId,
+      uid,
     });
 
     return new Response(JSON.stringify(result), {

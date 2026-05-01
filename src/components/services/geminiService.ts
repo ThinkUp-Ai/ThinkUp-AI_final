@@ -1,5 +1,5 @@
 // src/components/services/geminiService.ts
-import { getSessionId } from "../../lib/chat/sessionId";
+import { getUserId } from "../../lib/chat/sessionId";
 
 type StreamChunk = { text: string };
 
@@ -13,13 +13,13 @@ export function getChatSession() {
   return {
     async sendMessageStream({ message }: { message: string }) {
       try {
-        const sessionId = getSessionId();
+        const uid = getUserId();
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message, sessionId }),
+          body: JSON.stringify({ message, uid }),
         });
 
         const data = await res.json().catch(() => null);
