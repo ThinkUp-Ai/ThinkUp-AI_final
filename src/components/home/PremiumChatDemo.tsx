@@ -195,7 +195,11 @@ export default function PremiumChatDemo({
 
     try {
       const uid = getUserId();
-      const newConversation = shouldStartNewConversation(trimmed);
+      const hasVisibleConversation = messages.some(
+        (message) => message.role === "user"
+      );
+      const newConversation =
+        !hasVisibleConversation || shouldStartNewConversation(trimmed);
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
