@@ -1,6 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { getUserId } from "../../lib/chat/sessionId";
+import {
+  getUserId,
+  markConversationActive,
+  shouldStartNewConversation,
+} from "../../lib/chat/sessionId";
 
 type ChatMessage = {
   id: string;
@@ -191,12 +195,18 @@ export default function PremiumChatDemo({
 
     try {
       const uid = getUserId();
+      const newConversation = shouldStartNewConversation(trimmed);
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: trimmed, channel, uid }),
+        body: JSON.stringify({
+          message: trimmed,
+          channel,
+          uid,
+          new_conversation: newConversation,
+        }),
       });
 
       const data = await response.json().catch(() => null);
@@ -228,6 +238,7 @@ export default function PremiumChatDemo({
           text: replyText,
         },
       ]);
+      markConversationActive();
     } catch (sendError) {
       setError(
         sendError instanceof Error

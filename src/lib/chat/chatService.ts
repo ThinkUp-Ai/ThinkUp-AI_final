@@ -2,6 +2,7 @@ export type ChatRequest = {
   message: string;
   channel?: "whatsapp" | "instagram";
   uid: string;
+  newConversation?: boolean;
 };
 
 export type ChatServiceResult = {
@@ -117,7 +118,8 @@ function readReplyText(payload: unknown): string {
 async function forwardToN8n(
   message: string,
   channel: "whatsapp" | "instagram",
-  uid: string
+  uid: string,
+  newConversation: boolean
 ) {
   const webhookUrl = getWebhookUrl(channel);
   if (!webhookUrl) {
@@ -145,6 +147,7 @@ async function forwardToN8n(
       channel,
       message,
       uid,
+      new_conversation: newConversation,
       submittedAt: new Date().toISOString(),
     }),
   });
@@ -181,7 +184,8 @@ export async function createChatReply(
   const result = await forwardToN8n(
     request.message,
     channel,
-    request.uid
+    request.uid,
+    request.newConversation === true
   );
 
   return {

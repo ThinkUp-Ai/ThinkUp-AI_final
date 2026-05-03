@@ -27,6 +27,10 @@ function sanitizeUid(input: unknown) {
   return normalized;
 }
 
+function sanitizeNewConversation(input: unknown) {
+  return input === true;
+}
+
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
     const contentType = request.headers.get("content-type") || "";
@@ -63,6 +67,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     const payload = await request.json().catch(() => null);
     const messageValidation = sanitizeMessage(payload?.message);
     const uid = sanitizeUid(payload?.uid);
+    const newConversation = sanitizeNewConversation(payload?.new_conversation);
 
     if (!messageValidation.ok) {
       return new Response(
@@ -92,6 +97,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       message: messageValidation.value,
       channel,
       uid,
+      newConversation,
     });
 
     return new Response(JSON.stringify(result), {
